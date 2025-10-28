@@ -1,0 +1,13 @@
+echo "start shellscript"
+echo "Al"
+./offline dat/run0041.dat "Al"
+echo "Ti"
+./offline dat/run0042.dat "Ti"
+echo "Ag"
+./offline dat/run0043.dat "Ag"
+echo "Au"
+./offline dat/run0044.dat "Au"
+echo "empty target"
+./offline dat/run0045.dat "empty"
+
+echo "end shellscript"
