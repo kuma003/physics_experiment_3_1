@@ -10,6 +10,6 @@ echo "Au"
 echo "Li"
 ./offline dat/run0045.dat "Li"
 echo "empty target"
-./offline data/run0046.dat "empty"
+./offline dat/run0046s.dat "empty"
 
 echo "end shellscript"

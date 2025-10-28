@@ -149,7 +149,9 @@ int anaexec(int event_size, unsigned short *anabuff){
 
 int anaend(){
   // anaend is executed ONCE at the end of the program
+  
   hfile->Write(); // Write the histograms into the output file
+  hEx->Print((saveFigPath + "/excitation.png").c_str());
   return 0;
 }
 
@@ -185,7 +187,7 @@ int main(int argc, char *argv[]){
     atom_name = string(argv[2]);
     atom_name += ": "; // add whitespace
     saveFigPath += string(argv[2]);
-    if (mkdir(saveFigPath, S_IRWXO | S_IRWXU | S_IRWXG)){
+    if (mkdir(saveFigPath.c_str(), S_IRWXO | S_IRWXU | S_IRWXG)){
       std::cout << "Error; failed to make directory";
     }    
   }

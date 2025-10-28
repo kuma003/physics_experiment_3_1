@@ -63,11 +63,24 @@ int anainit(string hstFileName){
   hQDC2  = new TH2F("hQDC2" , (atom_name + "QDC vs. QDCt").c_str()         ,  256, 0., 2048.,  512,    0., 2048.);
   hQDC2e = new TH2F("hQDC2e", (atom_name + "QDC vs. QDCt (zoomed)").c_str(),  400, 0.,  400.,  400,    0.,  400.);
   hQDC2c = new TH2F("hQDC2c", (atom_name + "QDC vs. QDCtc").c_str()        ,  256, 0., 2048.,  250, -250.,  250.);
+  hQDC2->GetXaxis()->SetTitle("QDC [-]");
+  hQDC2->GetYaxis()->SetTitle("count [-]");
+  hQDC2e->GetXaxis()->SetTitle("QDC [-]");
+  hQDC2e->GetYaxis()->SetTitle("count [-]");
+  hQDC2c->GetXaxis()->SetTitle("QDC [-]");
+  hQDC2c->GetYaxis()->SetTitle("count [-]");
 
   // TDC vs. QDC : all, gamma, neutron
   hTDCQDC  = new TH2F("hTDCQDC"  , (atom_name + "TDC vs. QDC").c_str(), 1000, 0., 2500., 1000, 0., 2500.);
   hTDCQDCg = new TH2F("hTDCQDCg" , (atom_name + "TDC vs. QDC").c_str(), 1000, 0., 2500., 1000, 0., 2500.);
   hTDCQDCn = new TH2F("hTDCQDCn" , (atom_name + "TDC vs. QDC").c_str(), 1000, 0., 2500., 1000, 0., 2500.);
+
+  hTDCQDC->GetXaxis()->SetTitle("TDC [ch]");
+  hTDCQDC->GetYaxis()->SetTitle("QDC [-]");
+  hTDCQDCg->GetXaxis()->SetTitle("TDC [ch]");
+  hTDCQDCg->GetYaxis()->SetTitle("QDC [-]");
+  hTDCQDCn->GetXaxis()->SetTitle("TDC [ch]");
+  hTDCQDCn->GetYaxis()->SetTitle("QDC [-]");
 
   // TOF vs. QDC : all, gamma, neutron
   hTOFQDC  = new TH2F("hTOFQDC"  , (atom_name + "TOF vs. QDC").c_str(), 500, -100., 100., 500, 0., 2500.);
@@ -77,7 +90,7 @@ int anainit(string hstFileName){
   // Excitation energy
   hEx = new TH1F("hEx", (atom_name + "Ex").c_str() , 400, -10.0, 30.0);
   hEx->GetXaxis()->SetTitle("Energy [MeV]");
-  hEx->GetYaxis()->SetTitle("Counts [-]");
+  hEx->GetYaxis()->SetTitle("Count [-]");
 
   return 0;
 }
@@ -149,7 +162,9 @@ int anaexec(int event_size, unsigned short *anabuff){
 
 int anaend(){
   // anaend is executed ONCE at the end of the program
+  
   hfile->Write(); // Write the histograms into the output file
+  hEx->Print((saveFigPath + "/excitation.png").c_str());
   return 0;
 }
 
