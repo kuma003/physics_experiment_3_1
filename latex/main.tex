@@ -38,6 +38,8 @@
 \newcommand{\crefrangeconjunction}{から}
 \newcommand{\creflastconjunction}{、および}
 
+\newcommand{\diff}{\mathrm{d}}  % 微分のdを立体にする
+
 % 半角文字のパーセント、より右側は、コメントとして扱われます。
 
 % タイトルページの内容をここで記述します。
@@ -208,13 +210,13 @@ Delayの値と分離度の関係を示したのが図\ref{fig:分離度}であ�
 ここで、このときの QDC(Full) -- QDC(Tail) のグラフを\cref{fig:QDC2_50ns}に、 また\cref{fig:QDC2_50ns}においてQDC(Full) 250 Ch.~付近をY軸射影したものを\cref{fig:QDC2_50ns_projection}に示す。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figs/root/QDC2_50ns.pdf}
+    \includegraphics[width=0.9\linewidth]{figs/root/QDC2_50ns.pdf}
     \caption{Delay $50 \,\mathrm{ns}$時のQDC(Full) -- QDC(Tail) 相関.}
     \label{fig:QDC2_50ns}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figs/root/QDC2_yprojection.pdf}
+    \includegraphics[width=0.8\linewidth]{figs/root/QDC2_yprojection.pdf}
     \caption{\cref{fig:QDC2_50ns}における 250 Ch 付近のY軸射影.}
     \label{fig:QDC2_50ns_projection}
 \end{figure}
@@ -234,7 +236,7 @@ Delayの値と分離度の関係を示したのが図\ref{fig:分離度}であ�
 \cref{fig:Al_TDCQDC}に、このときのTDC--QDC相関を示す。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{figs/root/Al_TDCQDC.pdf}
+    \includegraphics[width=0.9\linewidth]{figs/root/Al_TDCQDC.pdf}
     \caption{\ce{Al}標的におけるTDC--QDC相関.}
     \label{fig:Al_TDCQDC}
 \end{figure}
@@ -244,7 +246,7 @@ Delayの値と分離度の関係を示したのが図\ref{fig:分離度}であ�
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{figs/root/Al_TDCQDCn_full.pdf}
+    \includegraphics[width=0.9\linewidth]{figs/root/Al_TDCQDCn_full.pdf}
     \caption{\ce{Al}標的における中性子のTDC--QDC相関.}
     \label{fig:Al_TDCQDCn_full}
 \end{figure}
@@ -261,7 +263,7 @@ Delayの値と分離度の関係を示したのが図\ref{fig:分離度}であ�
 以上の考察の下に、不要なデータを取り除いた後の中性子TDC--QDC相関を\cref{fig:Al_TDCQDCn}に示す。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{figs/root/Al_TDCQDCn.pdf}
+    \includegraphics[width=0.9\linewidth]{figs/root/Al_TDCQDCn.pdf}
     \caption{データ整形後の\ce{Al}標的における中性子TDC--QDC相関.}
     \label{fig:Al_TDCQDCn}
 \end{figure}
@@ -271,7 +273,7 @@ $\gamma$線のTDC--QDC相関においては、TDC 980 Ch.\, 付近に鋭いピ�
 600 Ch.~付近にもピークが見られるが、980 Ch.~付近のピークの方が鋭いことや、TDC Ch.~が大きく、より早く届いた粒子であると予想されることから、このピークが陽子が標的にあたって生成された$\gamma$線起源によるものだと推測される。
 
 % ここから、生成された$\gamma$線がシンチレータに届いてから次のRF信号が入力されるまでの時間が分かる。
-% Time Callibratorによる時間校正の結果から、$a = 22.21\, \mathrm{[Ch./ns]}$であることを用いると、
+% Time Callibratorによる時間較正の結果から、$a = 22.21\, \mathrm{[Ch./ns]}$であることを用いると、
 % \begin{equation}
 %     \mathrm{TDC}_\gamma = \frac{980 \, \mathrm{[Ch.]} }{22.21\, \mathrm{[Ch./ns]}} \approx 44.12\,\mathrm{[ns]}
 % \end{equation}
@@ -282,7 +284,7 @@ $\gamma$線のTDC--QDC相関においては、TDC 980 Ch.\, 付近に鋭いピ�
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{figs/root/Al_TDCQDCg_full.pdf}
+    \includegraphics[width=0.9\linewidth]{figs/root/Al_TDCQDCg_full.pdf}
     \caption{\ce{Al}標的における$\gamma$線のTDC--QDC相関.}
     \label{fig:Al_TDCQDCg_full}
 \end{figure}
@@ -300,52 +302,52 @@ $\gamma$線のTDC--QDC相関においては、TDC 980 Ch.\, 付近に鋭いピ�
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figs/root/Ti_TDCQDC.pdf}
+    \includegraphics[width=0.8\linewidth]{figs/root/Ti_TDCQDC.pdf}
     \caption{\ce{Ti}標的におけるTDC--QDC相関.}
     \label{fig:Ti_TDCQDC}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figs/root/Ti_TDCQDCn.pdf}
+    \includegraphics[width=0.8\linewidth]{figs/root/Ti_TDCQDCn.pdf}
     \caption{データ整形後の\ce{Ti}標的における中性子TDC--QDC相関.}
     \label{fig:Ti_TDCQDCn}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figs/root/Ag_TDCQDC.pdf}
+    \includegraphics[width=0.8\linewidth]{figs/root/Ag_TDCQDC.pdf}
     \caption{\ce{Ag}標的におけるTDC--QDC相関.}
     \label{fig:Ag_TDCQDC}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figs/root/Ag_TDCQDCn.pdf}
+    \includegraphics[width=0.8\linewidth]{figs/root/Ag_TDCQDCn.pdf}
     \caption{データ整形後の\ce{Ag}標的における中性子TDC--QDC相関.}
     \label{fig:Ag_TDCQDCn}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figs/root/Au_TDCQDC.pdf}
+    \includegraphics[width=0.8\linewidth]{figs/root/Au_TDCQDC.pdf}
     \caption{\ce{Au}標的におけるTDC--QDC相関.}
     \label{fig:Au_TDCQDC}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figs/root/Au_TDCQDCn.pdf}
+    \includegraphics[width=0.8\linewidth]{figs/root/Au_TDCQDCn.pdf}
     \caption{データ整形後の\ce{Au}標的における中性子TDC--QDC相関.}
     \label{fig:Au_TDCQDCn}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figs/root/Li_TDCQDC.pdf}
+    \includegraphics[width=0.8\linewidth]{figs/root/Li_TDCQDC.pdf}
     \caption{\ce{Li}標的におけるTDC--QDC相関.}
     \label{fig:Li_TDCQDC}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figs/root/Li_TDCQDCn.pdf}
+    \includegraphics[width=0.8\linewidth]{figs/root/Li_TDCQDCn.pdf}
     \caption{データ整形後の\ce{Li}標的における中性子TDC--QDC相関.}
     \label{fig:Li_TDCQDCn}
 \end{figure}
@@ -355,7 +357,7 @@ $\gamma$線のTDC--QDC相関においては、TDC 980 Ch.\, 付近に鋭いピ�
 
 先に述べたように、陽子が標的に当たって生成された$\gamma$線起因のピークはTDC 980 Ch.~付近に存在した。
 ここから、生成された$\gamma$線がシンチレータに届いてから次のRF信号が入力されるまでの時間が分かる。
-Time Callibratorによる時間校正の結果から、TDCのチャンネルと時間の対応について、$a = 22.21\, \mathrm{[Ch./ns]}$であることを用いると、
+Time Callibratorによる時間較正の結果から、TDCのチャンネルと時間の対応について、$a = 22.21\, \mathrm{[Ch./ns]}$であることを用いると、
 \begin{equation}
     \mathrm{TDC}_\gamma = \frac{980 \, \mathrm{[Ch.]} }{22.21\, \mathrm{[Ch./ns]}} \approx 44.12\,\mathrm{[ns]}
 \end{equation}
@@ -407,7 +409,7 @@ Time Callibratorによる時間校正の結果から、TDCのチャンネルと�
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{figs/root/Al_TOFQDC.pdf}
+    \includegraphics[width=0.9\linewidth]{figs/root/Al_TOFQDC.pdf}
     \caption{\ce{Al}標的における中性子TOF--QDC相関.}
     \label{fig:Al_TOFQDCn}
 \end{figure}
@@ -418,42 +420,40 @@ Time Callibratorによる時間校正の結果から、TDCのチャンネルと�
 本節では、飛行時間からIAS励起エネルギーについて決定する。
 
 飛行時間から、反応で消費されたエネルギーを求める方法については、先の原理の章で述べたので省略する。
+ただし、時間較正の不定性があるため、その影響を考慮する必要がある。
+ここでは、誤差伝播から各イベントごとにそのTOF起因のクーロンエネルギーの誤差を計算し、それを標準偏差とするガウシアンで畳み込むことで不定性を考慮した。
+
 各サンプルごとに、エネルギーを横軸に、そのカウント数を縦軸としたグラフを\cref{fig:Al_Ex,fig:Ti_Ex,fig:Ag_Ex,fig:Au_Ex,fig:Li_Ex}にそれぞれ示す。
 \ce{Ag}を除くすべてのサンプルにピークが見られた。
-このピークがクーロンエネルギー差に対応していると考えられる。
-
+このピークがIASにおけるクーロンエネルギー差に対応していると考えられる。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figs/root/Al_Ex.pdf}
-    \caption{\ce{Al}標的における中性子エネルギー分布.}
+    \includegraphics[width=0.9\linewidth]{figs/root/Al_Ex_smear.pdf}
+    \caption{\ce{Al}標的におけるエネルギー分布.}
     \label{fig:Al_Ex}
 \end{figure}
-
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figs/root/Ti_Ex.pdf}
-    \caption{\ce{Ti}標的における中性子エネルギー分布.}
+    \includegraphics[width=0.9\linewidth]{figs/root/Ti_Ex_smear.pdf}
+    \caption{\ce{Ti}標的におけるエネルギー分布.}
     \label{fig:Ti_Ex}
 \end{figure}
-
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figs/root/Ag_Ex.pdf}
-    \caption{\ce{Ag}標的における中性子エネルギー分布.}
+    \includegraphics[width=0.9\linewidth]{figs/root/Ag_Ex_smear.pdf}
+    \caption{\ce{Ag}標的におけるエネルギー分布.}
     \label{fig:Ag_Ex}
 \end{figure}
-
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figs/root/Au_Ex.pdf}
-    \caption{\ce{Au}標的における中性子エネルギー分布.}
+    \includegraphics[width=0.9\linewidth]{figs/root/Au_Ex_smear.pdf}
+    \caption{\ce{Au}標的におけるエネルギー分布.}
     \label{fig:Au_Ex}
 \end{figure}
-
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figs/root/Li_Ex.pdf}
-    \caption{\ce{Li}標的における中性子エネルギー分布.}
+    \includegraphics[width=0.9\linewidth]{figs/root/Li_Ex_smear.pdf}
+    \caption{\ce{Li}標的におけるエネルギー分布.}
     \label{fig:Li_Ex}
 \end{figure}
 
@@ -461,7 +461,7 @@ Time Callibratorによる時間校正の結果から、TDCのチャンネルと�
 代表的に、\ce{Al}についてエネルギー分布にフィッティングによる曲線を重ねたものを\cref{fig:Al_Ex_fitting}に示す。
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figs/root/Al_Ex_fitting.pdf}
+    \includegraphics[width=0.9\linewidth]{figs/root/Al_Ex_smear_fitting.pdf}
     \caption{\ce{Al}標的における中性子エネルギー分布とエネルギーピークのガウスフィッティング.}
     \label{fig:Al_Ex_fitting}
 \end{figure}
@@ -473,11 +473,11 @@ Time Callibratorによる時間校正の結果から、TDCのチャンネルと�
 また、これにより、理想的にはこの減衰によってステップ状のピークが見られるが、後述するような種々の不定性によってガウス関数が畳み込まれたような、鈍ったピークとして観測されている。
 
 そこで、このピークの左側のエッジについて\cref{fig:Li_Ex_fitting}のようにガウスフィッティングを行い、そのガウシアンの半値幅を基にクーロンエネルギー差を決定した。
-このとき、ガウシアンの平均は$2.103 \pm 0.286\,\mathrm{[MeV]}$, 標準偏差は$0.6066 \pm 0.1225\,\mathrm{[MeV]}$であるから、半値幅の右側を取って、クーロンエネルギー差は$1.389 \pm 0.142\,\mathrm{[MeV]}$であると求まる。
+このとき、ガウシアンの平均は$1.792 \pm 0.02759\,\mathrm{[MeV]}$, 標準偏差は$ 0.3958 \pm .006267\,\mathrm{[MeV]}$であるから、半値幅の右側を取って、クーロンエネルギー差は$1.326 \,\pm \, 0.06267\,\mathrm{[MeV]}$であると求まる。
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.4\linewidth]{figs/root/Li_Ex_fitting.pdf}
+    \includegraphics[width=0.9\linewidth]{figs/root/Li_Ex_smear_fitting.pdf}
     \caption{\ce{Li}標的における中性子エネルギー分布とエネルギーピークのガウスフィッティング.}
     \label{fig:Li_Ex_fitting}
 \end{figure}
@@ -485,18 +485,18 @@ Time Callibratorによる時間校正の結果から、TDCのチャンネルと�
 以上のようなガウスフィッティングによって得られたクーロンエネルギー差を以下の表に纏める。
 \begin{table}[H]
     \centering
+    \caption{標的原子とクーロンエネルギー差の関係.}
     \begin{tabular}{cc}
         \hline
          標的原子 & クーロンエネルギー差 $\mathrm{[MeV]}$ \\
          \hline\hline
-         \ce{Al} & $5.684 \, \pm \, 0.02544$\\
-         \ce{Ti} & $7.965 \, \pm \, 0.04620$\\
+         \ce{Al} & $5.708 \, \pm \, 0.01901$\\
+         \ce{Ti} & $7.847 \, \pm \, 0.03924$\\
          \ce{Ag} & N/A\\
-         \ce{Au} & $18.43 \, \pm \, 0.03669$\\
-         \ce{Li} & $1.389 \,\pm \, 0.1420$ \\
+         \ce{Au} & $18.38 \, \pm \, 0.04007$\\
+         \ce{Li} & $1.326 \,\pm \, 0.06267$ \\
          \hline 
     \end{tabular}
-    \caption{標的原子とクーロンエネルギー差の関係.}
     \label{tab:energy_perks}
 \end{table}
 
@@ -506,18 +506,18 @@ Time Callibratorによる時間校正の結果から、TDCのチャンネルと�
 ここでは、ガウシアンフィッティングにおける不定性のみを考慮している。
 \begin{table}[H]
     \centering
+    \caption{標的原子と計算された原子核半径の関係.}
     \begin{tabular}{cc}
         \hline
         標的原子 &  原子核半径 $\mathrm{[fm]}$\\
          \hline\hline
-         \ce{Al} & $4.104 \, \pm \, 0.018$\\
-         \ce{Ti} & $4.881 \, \pm \, 0.028$\\
+         \ce{Al} & $4.160 \, \pm \, 0.01410$\\
+         \ce{Ti} & $4.955 \, \pm \, 0.02478$\\
          \ce{Ag} & N/A\\
-         \ce{Au} & $7.453 \, \pm \, 0.015$\\
-         \ce{Li} & $3.425\,\pm \, 0.2755$ \\
+         \ce{Au} & $7.473 \, \pm \, 0.01629$\\
+         \ce{Li} & $4.560\,\pm \, 0.02155$ \\
          \hline 
     \end{tabular}
-    \caption{標的原子と計算された原子核半径の関係.}
     \label{tab:placeholder}
 \end{table}
 
@@ -531,6 +531,7 @@ Time Callibratorによる時間校正の結果から、TDCのチャンネルと�
 \end{figure}
 
 不定性の大きい\ce{Li}を除いた\ce{Al}、\ce{Ti}、\ce{Au}の原子については、確かに線形の関係になっていることが分かった。
+\ce{Li}についてはクーロンエネルギーのピークがバンド状であり、正確に決定することが難しいため、このような結果になったと考えられる。
 
 \section{考察}
 本節では、実験結果を踏まえ、以下の3点について考察を行う。
@@ -661,9 +662,9 @@ $\Delta E_\text{c}$のどちらの方向に影響するかを考えると、次�
         \cline{2-5}
          & $+$側 & $-$側 & $+$側 & $-$側 \\
         \hline\hline
-        \ce{Al} & $0.313$ & $0.311$ & $0.226$ & $0.225$ \\
-        \ce{Ti} & $0.922$ & $0.294$ & $0.565$ & $0.180$ \\
-        \ce{Au} & $0.387$ & $0.215$ & $0.157$ & $8.69 \times 10^{-2}$ \\
+        \ce{Al} & $0.223$ & $0.220$ & $0.165$ & $0.163$ \\
+        \ce{Ti} & $0.899$ & $0.210$ & $0.569$ & $0.132$ \\
+        \ce{Au} & $0.361$ & $0.162$ & $0.147$ & $6.60 \times 10^{-2}$ \\
         \hline
     \end{tabular}
     \label{tab:err_exp}
@@ -674,10 +675,10 @@ $\Delta E_\text{c}$のどちらの方向に影響するかを考えると、次�
 したがって、本節ではシンチレータ内の反応位置に起因する不確定性のみを考慮すると実験装置によって生じる誤差は以下のようになる。
 \begin{align*}
     d(\Delta E_\text{c}) &= \pm 3.44 \times 10^{-1} \, [\mathrm{MeV}] \\
-    dR &= 1.08 \, [\mathrm{fm}]
+    dR &= 1.10 \, [\mathrm{fm}]
 \end{align*}
 
-解析結果と二乗和平方根を用いて合成し、\ce{Ag}を除く各ターゲットの誤差をまとめた結果を\cref{tab:err_all}に示す。
+前章の解析結果と二乗和平方根を用いて合成し、\ce{Ag}を除く各ターゲットの誤差をまとめた結果を\cref{tab:err_all}に示す。
 
 \begin{table}[H]
     \centering
@@ -688,13 +689,23 @@ $\Delta E_\text{c}$のどちらの方向に影響するかを考えると、次�
         \cline{2-5}
          & $+$側 & $-$側 & $+$側 & $-$側 \\
         \hline\hline
-        \ce{Al} & & & & \\
-        \ce{Ti} & & & & \\
-        \ce{Au} & & & & \\
+        \ce{Al} & 0.224& 0.221& 0.164 & 0.166\\
+        \ce{Ti} & 0.900& 0.214& 0.134 & 0.570\\
+        \ce{Au} & 0.362& 0.167& 0.0680& 0.148 \\
+        \ce{Li} & 0.350& 0.350& 1.10 & 1.10 \\
         \hline
     \end{tabular}
     \label{tab:err_all}
 \end{table}
+
+以上の誤差の考察の上で、改めて原子量数$A^{1/3}$と原子核半径$R$の関係を\cref{fig:cbrt_A_vs_R_with_err}に示す。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{figs/graph/nucleus_radius_vs_A_cbrt_2.pdf}
+    \caption{原子核半径と質量数の関係.}
+    \label{fig:cbrt_A_vs_R_with_err}
+\end{figure}
+このことから、\ce{Li}が線形の関係から外れた要因としては、実験装置起因の誤差による影響も大きいものと考えられる。
 
 
 \subsection{\ce{Ag}標的においてIASによるピークが見られなかった要因}
