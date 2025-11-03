@@ -87,6 +87,14 @@ int anainit(string hstFileName){
   hTOFQDCg = new TH2F("hTOFQDCg" , (atom_name + "TOF vs. QDC").c_str(), 500, -100., 100., 500, 0., 2500.);
   hTOFQDCn = new TH2F("hTOFQDCn" , (atom_name + "TOF vs. QDC").c_str(), 500, -100., 100., 500, 0., 2500.);
 
+  hTOFQDC->GetXaxis()->SetTitle("TOF [ns]");
+  hTOFQDC->GetYaxis()->SetTitle("QDC");
+  hTOFQDCg->GetXaxis()->SetTitle("TOF [ns]");
+  hTOFQDCg->GetYaxis()->SetTitle("QDC");
+  hTOFQDCn->GetXaxis()->SetTitle("TOF [ns]");
+  hTOFQDCn->GetYaxis()->SetTitle("QDC");
+
+
   // Excitation energy
   hEx = new TH1F("hEx", (atom_name + "Ex").c_str() , 400, -10.0, 30.0);
   hEx->GetXaxis()->SetTitle("Energy [MeV]");
@@ -116,7 +124,7 @@ int anaexec(int event_size, unsigned short *anabuff){
 
   // n-gamma separation
   qdctc = qdct - (5.0 / 16.0 * qdc + 12.5); /* threshold whether the particle is Neutron or not*/
-  Bool_t is_undefined_line = qdc - (3 * tdc - 1500) > 0; // flag to remove the undefined line peak.
+  Bool_t is_undefined_line = qdc - (3.0 * tdc - 1500.0) > 0.0; // flag to remove the undefined line peak.
   Bool_t fNeutron = qdc>qthpsd && qdctc>0.0 && is_undefined_line; // fNeutron=true for neutron events
   Bool_t fGamma   = qdc>qthpsd && qdctc<0.0 && is_undefined_line; // fGamma  =true for gamma   events
 
@@ -132,7 +140,7 @@ int anaexec(int event_size, unsigned short *anabuff){
   Double_t ex = tp - tn; /*?*/       // excitation energy
 
   // Fill in the histograms
-  if(! qdc>0.0) return 0;  // If qdc is not recorded, skip the event.
+  if(! (qdc>0.0)) return 0;  // If qdc is not recorded, skip the event.
 
   hTDC ->Fill(tdc );
   hQDC ->Fill(qdc );
