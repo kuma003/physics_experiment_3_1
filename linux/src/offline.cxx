@@ -26,7 +26,8 @@ Double_t   mn  = 939.565346;   // Neutron mass [MeV/c2]
 Double_t   tp  = 48.81;        // kinetic energy of incident proton [MeV]
 Double_t   trf = 1.0/16.2344e6 * 1.0e9;       // RF period [ns]
 Double_t   fpl = (7507.0 + 2.0 + 50.8/2.0)/1000.0; // Distance from target to detector [m]
-Double_t   fpl_err = 25.4 / 1000.0; // Uncertainty in fpl [m]
+// Double_t   fpl_err = 25.4 / 1000.0; // Uncertainty in fpl [m]
+Double_t   fpl_err = 0.0; // Uncertainty in fpl [m]
 Double_t   ch2ns = 1.0/22.2105; /*?*/   // Conversion factor from channel to nsec [ns/ch]
 Double_t   ch2ns_err = 0.01681 / (22.2105*22.2105); /*?*/ // Error of the conversion factor [ns/ch]
 Double_t   qthpsd = 900.0; // qdc software threshold for psd [ch]
@@ -105,6 +106,7 @@ int anainit(string hstFileName){
   hExSmear = new TH1F("hExSmear", (atom_name + "Ex").c_str() , 400, -10.0, 30.0);
   hExSmear->GetXaxis()->SetTitle("Energy [MeV]");
   hExSmear->GetYaxis()->SetTitle("Count [-]");
+  hExSmear->Sumw2();
 
   return 0;
 }
