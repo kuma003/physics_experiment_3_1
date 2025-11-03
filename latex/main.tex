@@ -140,6 +140,7 @@
 液体シンチレータ中の単位長さ当たりのエネルギ－損失は、Betheの式によると
 \begin{align}
     -\frac{dE}{dx}=2\pi N_a r_e^2 m_e c^2 \rho \frac{Z}{A}\frac{z^2}{\beta}\left[\ln\left(\frac{2m_e \gamma^2 v^2 W_{\mathrm{max}}}{I^2}\right)-2\beta^2-\delta-2\frac{C}{Z}\right]
+    \label{eq:Bethe}
 \end{align}
 と表現できる。この式から
 \begin{equation}
@@ -152,7 +153,7 @@
 \subsection{実験セットアップ全体図、回路図}
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{figs/equipments/32course.pdf}
+    \includegraphics[width=\linewidth]{figs/equipments/32course.pdf}
     \caption{実験装置全体図}
     \label{fig:32course}
 \end{figure}
@@ -160,7 +161,7 @@
     \centering
     \includegraphics[width=0.5\linewidth]{figs/equipments/Goodnotes.pdf}
     \caption{液体シンチレータ図}
-    \label{fig:placeholder}
+    \label{fig:liquid_scintillator}
 \end{figure}
 \subsection{Am-Be線源による電圧の決定}
 ビームタイム中は50MeVのシグナルがQDCのフルスケール2048chに入るようにする必要がある。本実験ではAm-Be線源からのガンマ線(4.44MeV)のコンプトンエッジを観測し、hQDCの図でAm-Be線源のエッジが300ch付近に描像されるように調整することにした。
@@ -202,7 +203,7 @@ Delayの値と分離度の関係を示したのが図\ref{fig:分離度}であ�
 \enskip
 
 % なお、ここで分離度は QDC(Full) vs. QDC(Tail) のグラフにおいて、QDC(Full) が240-264の区間についてy軸へ射影を射影を取ったものである。
-\cref{fig:--}より、分離度を最大にするDelayの値は$50 \, \mathrm{ns}$であることが分かった。
+\cref{fig:分離度}より、分離度を最大にするDelayの値は$50 \, \mathrm{ns}$であることが分かった。
 
 ここで、このときの QDC(Full) -- QDC(Tail) のグラフを\cref{fig:QDC2_50ns}に、 また\cref{fig:QDC2_50ns}においてQDC(Full) 250 Ch.~付近をY軸射影したものを\cref{fig:QDC2_50ns_projection}に示す。
 \begin{figure}[H]
@@ -417,7 +418,7 @@ Time Callibratorによる時間校正の結果から、TDCのチャンネルと�
 本節では、飛行時間からIAS励起エネルギーについて決定する。
 
 飛行時間から、反応で消費されたエネルギーを求める方法については、先の原理の章で述べたので省略する。
-各サンプルごとに、エネルギーを横軸に、そのカウント数を縦軸としたグラフを\cref{fig:Al_Ex,fig:Ti_Ex,fig:Ag_Ex,Fig:Au_Ex,Fig;Li_Ex}にそれぞれ示す。
+各サンプルごとに、エネルギーを横軸に、そのカウント数を縦軸としたグラフを\cref{fig:Al_Ex,fig:Ti_Ex,fig:Ag_Ex,fig:Au_Ex,fig:Li_Ex}にそれぞれ示す。
 \ce{Ag}を除くすべてのサンプルにピークが見られた。
 このピークがクーロンエネルギー差に対応していると考えられる。
 
@@ -467,9 +468,9 @@ Time Callibratorによる時間校正の結果から、TDCのチャンネルと�
 
 \ce{Li}標的については、バンド状のピークが見られたため、ガウスフィッティングを行うことは容易ではない。
 
-このようなピークが見られる要因は、\ce{Li}標的の厚さが他の標的と比べ厚いため、\ce{Li}標的内部で陽子が反応する位置によっては入射エネルギーの減衰が生じるためである。
+このようなピークが見られる要因は、\ce{Li}標的の厚さが他の標的と比べ厚いため、\ce{Li}標的内部で陽子が反応する位置に応じて入射エネルギーの減衰が生じるためである。
 従って、このピークの左側が減衰なく反応したときのクーロンエネルギー差に相当する。
-また、これによって理想的にはIAS励起エネルギーによってステップ状のピークが見られるが、後述するような種々の不定性によってガウス関数が畳み込まれたような、鈍ったピークとして観測されている。
+また、これにより、理想的にはこの減衰によってステップ状のピークが見られるが、後述するような種々の不定性によってガウス関数が畳み込まれたような、鈍ったピークとして観測されている。
 
 そこで、このピークの左側のエッジについて\cref{fig:Li_Ex_fitting}のようにガウスフィッティングを行い、そのガウシアンの半値幅を基にクーロンエネルギー差を決定した。
 このとき、ガウシアンの平均は$2.103 \pm 0.286\,\mathrm{[MeV]}$, 標準偏差は$0.6066 \pm 0.1225\,\mathrm{[MeV]}$であるから、半値幅の右側を取って、クーロンエネルギー差は$1.389 \pm 0.142\,\mathrm{[MeV]}$であると求まる。
@@ -495,13 +496,14 @@ Time Callibratorによる時間校正の結果から、TDCのチャンネルと�
          \ce{Li} & $1.389 \,\pm \, 0.1420$ \\
          \hline 
     \end{tabular}
-    \caption{Caption}
+    \caption{標的原子とクーロンエネルギー差の関係.}
     \label{tab:energy_perks}
 \end{table}
 
 % 核半径の計算
 以上により、クーロンエネルギーが得られたため、これから原子核半径を求めることができる。
 その結果を以下の表に纏める。
+ここでは、ガウシアンフィッティングにおける不定性のみを考慮している。
 \begin{table}[H]
     \centering
     \begin{tabular}{cc}
@@ -515,32 +517,32 @@ Time Callibratorによる時間校正の結果から、TDCのチャンネルと�
          \ce{Li} & $3.425\,\pm \, 0.2755$ \\
          \hline 
     \end{tabular}
-    \caption{Caption}
+    \caption{標的原子と計算された原子核半径の関係.}
     \label{tab:placeholder}
 \end{table}
 
-ここで、原子核半径$R$と質量数$A$には$R = A^{1/3}$の関係がある。
+また、原子核半径$R$と質量数$A$には$R \propto A^{1/3}$の関係がある。
 そこで、$A^{1/3}$と$R$の相関を次の\cref{fig:cbrt_A_vs_R}に示す。
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{figs/graph/nucleus_radius_vs_A_cbrt.pdf}
-    \caption{Caption}
+    \includegraphics[width=0.7\linewidth]{figs/graph/nucleus_radius_vs_A_cbrt.pdf}
+    \caption{原子核半径と質量数の関係.}
     \label{fig:cbrt_A_vs_R}
 \end{figure}
 
-不定性の大きい\ce{Li}を除いた\ce{Al}、\ce{Ti}、\ce{Au}の原子については、線形の関係になっていることが分かった。
+不定性の大きい\ce{Li}を除いた\ce{Al}、\ce{Ti}、\ce{Au}の原子については、確かに線形の関係になっていることが分かった。
 
 \section{考察}
 本節では、実験結果を踏まえ、以下の3点について考察を行う。
 \begin{itemize}
     \item 実験装置によって生じる誤差
     \item Ag標的においてIASによるピークが見られなかった要因
-    \item TDC vs QDCのグラフに表れている信号の意味
+    \item TDC vs. QDCのグラフに表れている信号の意味
 \end{itemize}
 
 \subsection{実験装置によって生じる誤差}
 実験装置に起因する誤差の一つとして、液体シンチレータ内における中性子とシンチレータとの反応位置の不確定性が挙げられる。
-\cref{fig:シンチレータ}に示すように、液体シンチレータは中性子の進行方向に対して$50.8\,\mathrm{mm}$の幅をもつ。
+\cref{fig:liquid_scintillator}に示すように、液体シンチレータは中性子の進行方向に対して$50.8\,\mathrm{mm}$の幅をもつ。
 したがって、ターゲットからシンチレータまでの距離には$\pm 25.4\,\mathrm{mm}$の位置不確定性が存在すると考えられる。
 
 この位置の誤差のクーロンエネルギー差$E_{\text{c}}$および原子半径$R$への伝搬の過程を以下に示す。
@@ -673,7 +675,7 @@ $\Delta E_\text{c}$のどちらの方向に影響するかを考えると、次�
     dR &= 1.08 \, [\mathrm{fm}]
 \end{align*}
 
-解析結果と二乗和平方根を用いて合成し、$Ag$を除く各ターゲットの誤差をまとめた結果を\cref{tab:err_all}に示す。
+解析結果と二乗和平方根を用いて合成し、\ce{Ag}を除く各ターゲットの誤差をまとめた結果を\cref{tab:err_all}に示す。
 
 \begin{table}[H]
     \centering
@@ -773,16 +775,16 @@ TDC--ADC相関図において、最初に観測される明瞭なピーク（\cr
     T_\text{p} &= (\gamma - 1) m_\text{p} c^2, \\
     \therefore \beta &= \sqrt{1 - \left( \frac{m_\text{p} c^2}{T_\text{p} + m_\text{p} c^2} \right)^2} \approx 0.3106
 \end{align*}
-と求められる。このとき、\cref{ビームダンプ}を見るとターゲットからビームダンプまでの距離は約$2.1\,\mathrm{m}$であるため、$T_\text{p} = 50 \,\mathrm{MeV}$と仮定すると飛行時間は
+と求められる。このとき、\cref{fig:32course}を見るとターゲットからビームダンプまでの距離は約$2.1\,\mathrm{m}$であるため、$T_\text{p} = 50 \,\mathrm{MeV}$と仮定すると飛行時間は
 \begin{equation*}
     t = \frac{2.1}{\beta c} \approx 22\,\mathrm{ns}
 \end{equation*}
 となり、測定値とおおむね一致する。このことから、2つ目のピークがビームダンプ起源のガンマ線であるという考えは妥当であるだろう。
 
 \paragraph{荷電粒子の信号}
-TDC--ADC相関図の中で、TDCおよびADCの両方で明瞭なピークを示す信号（\cref{fig:Al_TDC-ADC_separated}の②）は、荷電粒子によるものであると考えられる。荷電粒子はBetheの式（\cref{betheの式}）に示されるように、ガンマ線や中性子に比べシンチレータ中で大きなエネルギー損失を生じ、ADC値が明瞭なピークを形成するためである。また、この信号は$T_\text{RF}$と同周期で出現することから、陽子ビームと同期して放出されていることがわかる。
+TDC--ADC相関図の中で、TDCおよびADCの両方で明瞭なピークを示す信号（\cref{fig:Al_TDC-ADC_separated}の②）は、荷電粒子によるものであると考えられる。荷電粒子はBetheの式（\cref{eq:Bethe}）に示されるように、ガンマ線や中性子に比べシンチレータ中で大きなエネルギー損失を生じ、ADC値が明瞭なピークを形成するためである。また、この信号は$T_\text{RF}$と同周期で出現することから、陽子ビームと同期して放出されていることがわかる。
 
-\cref{ビームダンプ}に示す実験配置を考慮すると、遮蔽物を通過しにくい荷電粒子が検出器に到達する場合、主にターゲット側から入射したものに限られる。したがって、この信号は陽子入射に伴って生成された粒子である可能性が高い。ただし、本実験のデータのみから粒子種を特定することは困難であると考えられる。
+\cref{fig:32course}に示す実験配置を考慮すると、遮蔽物を通過しにくい荷電粒子が検出器に到達する場合、主にターゲット側から入射したものに限られる。したがって、この信号は陽子入射に伴って生成された粒子である可能性が高い。ただし、本実験のデータのみから粒子種を特定することは困難であると考えられる。
 
 また、荷電粒子のピークから左下に伸びている直線の信号についても、その要因となる現象・粒子の推定が困難であった。
 
