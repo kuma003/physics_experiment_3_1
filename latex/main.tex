@@ -1,0 +1,834 @@
+\documentclass[uplatex,dvipdfmx,a4j,12pt]{jsarticle}
+
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{comment}
+\usepackage{color}
+\usepackage{url}
+\usepackage{siunitx}
+\usepackage[version=4]{mhchem}
+\usepackage{paralist}
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage[dvipdfmx]{hyperref}
+\usepackage{pxjahyper}
+
+\usepackage{enumitem}
+\setlist[description]{parsep=5pt}
+\setlist[enumerate]{parsep=5pt}
+
+\usepackage{float}
+\usepackage{here}
+
+%これ以降のパッケージは自分で入れたもの(土橋)
+\usepackage{multirow}
+\usepackage{here}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{physics}
+\usepackage{mathcomp}
+\usepackage{makecell}
+
+%佐藤追加分
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{equation}{式}{式}
+\crefname{table}{表}{表}
+\newcommand{\crefrangeconjunction}{から}
+\newcommand{\creflastconjunction}{、および}
+
+% 半角文字のパーセント、より右側は、コメントとして扱われます。
+
+% タイトルページの内容をここで記述します。
+\title{
+  物理学実験IIIレポート\\    % \\ は、強制的に改行するコマンドです。
+  「原子核散乱」
+  }
+\author{
+  }
+\date{
+  実験日：2025年 10月 6日～ 11月 4日 \\
+  提出日：2025年 x月 x日}  % 実験日と、提出日を記入して下さい
+
+% ここから本文が始まります。
+\begin{document}
+
+% 上で設定したタイトルページの情報は、\maketitle があって始めて、コンパイル後に表示されます。
+\maketitle
+
+% レポートのフィードバックのコメントを希望しない場合には、
+% 48行目から55行目までをコメントアウト（行頭に%を入れる）。
+% コメントを希望する場合は、何について聞きたいかを具体的に書いて下さい。
+
+% 縦方向の空白を挿入するコマンドです。em は行の高さ分、を意味する単位です。
+\vspace{2em}
+\begin{center}
+    \begin{minipage}{0.5\linewidth}
+        レポートのコメントを希望します。
+
+        具体的には、○○について評価を下さい。
+    \end{minipage}
+\end{center}
+
+\vspace{5em}  
+
+
+% 概要は論文・レポート全体を一つの段落にまとめたものです。
+% 物理の分野では、概要では段落分けをしません。
+%
+\begin{abstract}
+\end{abstract}
+
+% 強制的に改ページを行う
+\newpage
+
+\section{目的}
+\section{原理}
+\subsection{アイソバリックアナログ状態(IAS)}
+アイソバリックアナログ状態(IAS, Isobaric Analog State)とは、原子核内の中性子を同じ軌道の陽子に入れ替えて作られる状態である。同じ軌道の陽子と中性子は対称性を持ち、もしクーロン力が無ければ、IASは元の状態と等しいエネルギーを持つ。実際にはクーロン力の分だけエネルギーが上昇して観測され、本実験ではこの励起エネルギーを観測により求める。
+\subsection{(p,n)反応測定によるIASの観測}
+(p,n)反応とは陽子を標的原子核に衝突させることによって、標的核内の陽子を中性子に変換するものである。ここで(p,n)反応におけるIASでの遷移は、核構造が変わらないため遷移強度が大きい。本実験で観測するIASの励起エネルギー$E_x$は、
+\begin{equation*}
+    E_x=\Delta E_{{\mathrm{c}}}+(m_n-m_p)
+\end{equation*}
+ここで$\Delta E_{{\mathrm{c}}}$は(p,n)反応によるクーロンエネルギー差、$m_n,m_p$は中性子、陽子のそれぞれの静止質量である。なお$\Delta E_{{\mathrm{c}}}$は、
+\begin{equation*}
+    \Delta E_{{\mathrm{c}}}=\frac{3e^2}{20\pi\epsilon_0 R}(2Z+1)
+\end{equation*}
+である。
+\subsection{TOF法と加速器}
+エネルギー保存則より、式\ref{eq:エネ保}が成り立つ。
+\begin{equation}
+    (m_p+T_p)+(M_a+T_a)=(m_n+T_n)+(M_b^*+T_b)
+    \label{eq:エネ保}
+\end{equation}
+ここで、$M_b^*$は残留原子核の励起質量であり、
+\begin{equation}
+    M_b^*=M_b+E_x
+\end{equation}
+の関係がある。以上から、IASの励起エネルギーは
+\begin{align}
+    E_x=\{(m_p+T_p)+(M_a+T_a)\}-\{(m_n+T_n)+(M_b+T_b)\}
+    \label{eq:励起エネルギー1}
+\end{align}
+と表される。また、運動量保存則より、式\ref{eq:運動量}が成り立つ。
+\begin{equation}
+    \vec{P_p}+\vec{P_a}=\vec{P_n}+\vec{P_b}
+    \label{eq:運動量}
+\end{equation}
+今回の実験条件として、$T_a=0, \quad P_a=0,\quad M_a\approx M_b$を課す。すると、以下の関係が成り立つ。
+\begin{align}
+    P_b&=P_p-P_n\notag\\
+    T_b&=\frac{P_b^2}{M_b}=\frac{(P_p-P_n)^2}{M_b}\approx0\notag
+\end{align}
+これらを式\ref{eq:励起エネルギー1}に代入すると
+\begin{equation}
+    E_x=(m_p+T_p)-(m_n+T_n)
+    \label{eq:励起エネルギー2}
+\end{equation}
+となる。$m_p,\quad m_n$は文献値を用い、$T_p$は加速器の出射エネルギーを代入する。測定によって$T_n$を求めることで励起エネルギーを算出する。具体的には、
+\begin{align}
+    T_n&=\frac{1}{2}m_nv^2\notag\\
+    v&=\frac{L}{\Delta t}
+\end{align}
+    
+\subsection{液体シンチレータと中性子ーガンマ線弁別}
+液体シンチレータは中性子とγ線の弁別が可能である。\\
+液体シンチレータで観測される波形は、中性子とγ線で異なる。下図の写真を見るとおり中性子とγ線の波形を比べたとき、$Q(\mathrm{Tail})/Q(\mathrm{Full})$の値が大きい方が中性子、$Q(\mathrm{Tail})/Q(\mathrm{Full})$の値が小さい方がγ線である。\\
+これはγ線はシンチレータ内で電子が反跳しているのに対して、中性子は陽子が反跳していることに起因する。\\
+液体シンチレータ中の単位長さ当たりのエネルギ－損失は、Betheの式によると
+\begin{align}
+    -\frac{dE}{dx}=2\pi N_a r_e^2 m_e c^2 \rho \frac{Z}{A}\frac{z^2}{\beta}\left[\ln\left(\frac{2m_e \gamma^2 v^2 W_{\mathrm{max}}}{I^2}\right)-2\beta^2-\delta-2\frac{C}{Z}\right]
+\end{align}
+と表現できる。この式から
+\begin{equation}
+    \frac{dE}{dx}\propto \beta^{-2}
+\end{equation}
+がわかる。同エネルギーの陽子・電子が検出器内部を走る場合、陽子の方がエネルギー損失の大きさが大きい。\\
+有機シンチレータの発光は
+
+\section{実験}
+\subsection{実験セットアップ全体図、回路図}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figs/equipments/32course.pdf}
+    \caption{実験装置全体図}
+    \label{fig:32course}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{figs/equipments/Goodnotes.pdf}
+    \caption{液体シンチレータ図}
+    \label{fig:placeholder}
+\end{figure}
+\subsection{Am-Be線源による電圧の決定}
+ビームタイム中は50MeVのシグナルがQDCのフルスケール2048chに入るようにする必要がある。本実験ではAm-Be線源からのガンマ線(4.44MeV)のコンプトンエッジを観測し、hQDCの図でAm-Be線源のエッジが300ch付近に描像されるように調整することにした。
+\subsection{Am-Be線源によるn-$\gamma$弁別の最適化}
+tail gateのタイミング(Delay)の値を変化させ、データを取得した。次に、それぞれのDelayのデータを用いてQDC(full)とQDC(tail)の相関図を表示し、QDC(full)のスペクトルの250ch付近をY軸方向に射影した。その後、中性子、γ線をそれぞれによるピークをガウス分布でフィットし、分離度を決定した。分離度の計算は以下の式を使って行った。
+\begin{align}
+    \text{分離度}&=\frac{X_n-X_\gamma}{\sigma_n+\sigma_\gamma}\\
+    X:&\text{ピークの中心値}\notag\\
+    \sigma:&\text{ピークの幅}\notag
+\end{align}
+\subsection{Time Calibratorによる時間較正}
+検出器入力の代わりにStartシグナル、RF入力の代わりにStopシグナルを入力し、TDCスペクトルを取得した。これをrootコマンドで開いてヒストグラムを表示し、ピーク同士の間隔が正確に10nsに対応することを利用して各ピークの中心値を読み取った。次に、取得した時間とチャネル数のデータから最小二乗法により較正直線
+\begin{equation}
+    \text{TDC[ch]}=a\times \text{Time[ns]}+b
+    \label{eq:較正直線1}
+\end{equation}
+を作成した。データをプロットしたのが図\ref{fig:TimeCalib}である。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{figs/graph/TimeCalib.pdf}
+    \caption{横軸を時間(ns)、縦軸をTDC(ch)としてプロットしたグラフ。}
+    \label{fig:TimeCalib}
+\end{figure}
+フィッティングの結果、
+\begin{align}
+    a&=22.21\quad\pm0.01681\quad(0.07568\text{％})\notag\\
+    b&=110.6\quad\pm0.8488\quad(0.7676\text{％})\notag
+\end{align}
+を得た。ここでは誤差として測定点とフィット結果の間の標準誤差を取った。（）内は値に対する誤差の比率である。
+\section{解析・結果}
+\subsection{n-$\gamma$弁別}
+Delayの値と分離度の関係を示したのが図\ref{fig:分離度}である。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{figs/graph/separation.pdf}
+    \caption{Delayを横軸、分離度を縦軸にしてプロットした結果。50nsの時に分離度が最大となっている。}
+    \label{fig:分離度}
+\end{figure}
+\enskip
+
+% なお、ここで分離度は QDC(Full) vs. QDC(Tail) のグラフにおいて、QDC(Full) が240-264の区間についてy軸へ射影を射影を取ったものである。
+\cref{fig:--}より、分離度を最大にするDelayの値は$50 \, \mathrm{ns}$であることが分かった。
+
+ここで、このときの QDC(Full) -- QDC(Tail) のグラフを\cref{fig:QDC2_50ns}に、 また\cref{fig:QDC2_50ns}においてQDC(Full) 250 Ch.~付近をY軸射影したものを\cref{fig:QDC2_50ns_projection}に示す。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figs/root/QDC2_50ns.pdf}
+    \caption{Delay $50 \,\mathrm{ns}$時のQDC(Full) -- QDC(Tail) 相関.}
+    \label{fig:QDC2_50ns}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figs/root/QDC2_yprojection.pdf}
+    \caption{\cref{fig:QDC2_50ns}における 250 Ch 付近のY軸射影.}
+    \label{fig:QDC2_50ns_projection}
+\end{figure}
+
+また、\cref{fig:QDC2_50ns}に示した測定結果から、上部に見える中性子起源のピークと下部に見える$\gamma$線起源のピークを弁別するために、以下の直線を定義する:
+\begin{equation}
+    \mathrm{QDC(Tail)} = 0.313\times \mathrm{QDC(Full)} + 12.5.
+\end{equation}
+これは、\cref{fig:QDC2_50ns_projection}のようなY軸射影を何点かで行い、二つのピークの中点を結ぶことで得られた直線である。
+以降の解析では、この直線よりも上部を中性子、下部を$\gamma$線として弁別する。
+
+\subsection{TDC-ADC相関図}
+
+本節では、\ce{Al}、\ce{Ti}、\ce{Ag}、\ce{Au}、\ce{Li}標的に加速器を用いて陽子を照射して得られるTDC -- ADC (QDC) 相関について述べる。
+
+最初に、\ce{Al}標的に照射して得られた結果について詳述する。
+\cref{fig:Al_TDCQDC}に、このときのTDC--QDC相関を示す。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{figs/root/Al_TDCQDC.pdf}
+    \caption{\ce{Al}標的におけるTDC--QDC相関.}
+    \label{fig:Al_TDCQDC}
+\end{figure}
+
+また、\cref{fig:Al_TDCQDCn_full}に中性子--$\gamma$線弁別によって得られた中性子のTDC--QDC相関を示す。
+2次関数的な分布の中に、特にTDCが1000 Ch.~付近にピークが見られるほか、TDC 1000 Ch.~, QDC 1400 Ch. 付近から左下へと減少するような直線的なピークが見られた。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{figs/root/Al_TDCQDCn_full.pdf}
+    \caption{\ce{Al}標的における中性子のTDC--QDC相関.}
+    \label{fig:Al_TDCQDCn_full}
+\end{figure}
+
+
+
+\cref{fig:Al_TDCQDCn_full}において、2つの曲線的な分布が見られるが、TDCがシンチレータで検出されてから次のRF信号が入力されるまでの時間を表すことに注意すると、最も早く届いた中性子がTDC 1000 Ch.~にみられる曲線の端に相当し、下部の曲線は上部の曲線からRF周期が1つだけ遅れて届いた中性子によるのであるとわかる。
+
+解析においてRF周期が遅れているサンプルが混在すると、中性子の飛行時間決定に不定性を及ぼしてしまう。
+そこで、QDC 900 Ch.~以下のデータを除くことで、RF周期が遅れているデータを除去する。
+また、左下へと減少するような直線的なピークは、後の章で詳細に考察するが、ここで考察したい中性子起源ではなく荷電粒子起源のピークと考えられる。
+そこで、この直線を取り除くために$\mathrm{QDC} = 3 \times \mathrm{TDC} - 1500$なる直線を定義し、これより上部のデータのみを抽出して以降の解析に用いる。
+
+以上の考察の下に、不要なデータを取り除いた後の中性子TDC--QDC相関を\cref{fig:Al_TDCQDCn}に示す。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{figs/root/Al_TDCQDCn.pdf}
+    \caption{データ整形後の\ce{Al}標的における中性子TDC--QDC相関.}
+    \label{fig:Al_TDCQDCn}
+\end{figure}
+
+また、\cref{fig:Al_TDCQDCg_full}に中性子--$\gamma$線弁別によって得られた$\gamma$線のTDC--QDC相関を示す。
+$\gamma$線のTDC--QDC相関においては、TDC 980 Ch.\, 付近に鋭いピークが見られた。
+600 Ch.~付近にもピークが見られるが、980 Ch.~付近のピークの方が鋭いことや、TDC Ch.~が大きく、より早く届いた粒子であると予想されることから、このピークが陽子が標的にあたって生成された$\gamma$線起源によるものだと推測される。
+
+% ここから、生成された$\gamma$線がシンチレータに届いてから次のRF信号が入力されるまでの時間が分かる。
+% Time Callibratorによる時間校正の結果から、$a = 22.21\, \mathrm{[Ch./ns]}$であることを用いると、
+% \begin{equation}
+%     \mathrm{TDC}_\gamma = \frac{980 \, \mathrm{[Ch.]} }{22.21\, \mathrm{[Ch./ns]}} \approx 44.12\,\mathrm{[ns]}
+% \end{equation}
+% である。
+
+% また、$\gamma$線は光速で飛行することから、標的からシンチレータまでの距離$L = 7.5344\,\mathrm{[m]}$を用いると、生成されてからシンチレータに届くまでの時間は、$L/c \approx 25.1\,\mathrm{[ns]}$である。
+% したがって、$\gamma$線が
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{figs/root/Al_TDCQDCg_full.pdf}
+    \caption{\ce{Al}標的における$\gamma$線のTDC--QDC相関.}
+    \label{fig:Al_TDCQDCg_full}
+\end{figure}
+
+\enskip
+
+また、同様に\ce{Ti}、\ce{Ag}、\ce{Au}、\ce{Li}標的におけるTDC--QDC相関と弁別によって得られる中性子TDC--QDC相関を
+\cref{fig:Ti_TDCQDC,fig:Ti_TDCQDCn,fig:Ag_TDCQDC,fig:Ag_TDCQDCn,fig:Au_TDCQDC,fig:Au_TDCQDCn,fig:Li_TDCQDC,fig:Li_TDCQDCn}に示す。
+ここで中性子TDC--QDC相関はすべてデータトリミング後の結果である。
+また、$\gamma$線TDC--QDC相関については\ce{Al}と同様であるため省略する。
+
+\ce{Ag}標的以外では、中性子TDC--QDC相関においてTDC 700-1000 Ch.~の領域に\ce{Al}標的同様のピークが見られ、特に\ce{Li}標的においてはTDC 1000 Ch.~付近に太いバンド状のピークが見られた。
+これらのピークがIAS起源のピークであると推察される。
+また、いずれの標的においても、中性子TDC--QDC相関においてTDC 1000--1200付近にエッジを持つことが分かった。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figs/root/Ti_TDCQDC.pdf}
+    \caption{\ce{Ti}標的におけるTDC--QDC相関.}
+    \label{fig:Ti_TDCQDC}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figs/root/Ti_TDCQDCn.pdf}
+    \caption{データ整形後の\ce{Ti}標的における中性子TDC--QDC相関.}
+    \label{fig:Ti_TDCQDCn}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figs/root/Ag_TDCQDC.pdf}
+    \caption{\ce{Ag}標的におけるTDC--QDC相関.}
+    \label{fig:Ag_TDCQDC}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figs/root/Ag_TDCQDCn.pdf}
+    \caption{データ整形後の\ce{Ag}標的における中性子TDC--QDC相関.}
+    \label{fig:Ag_TDCQDCn}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figs/root/Au_TDCQDC.pdf}
+    \caption{\ce{Au}標的におけるTDC--QDC相関.}
+    \label{fig:Au_TDCQDC}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figs/root/Au_TDCQDCn.pdf}
+    \caption{データ整形後の\ce{Au}標的における中性子TDC--QDC相関.}
+    \label{fig:Au_TDCQDCn}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figs/root/Li_TDCQDC.pdf}
+    \caption{\ce{Li}標的におけるTDC--QDC相関.}
+    \label{fig:Li_TDCQDC}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figs/root/Li_TDCQDCn.pdf}
+    \caption{データ整形後の\ce{Li}標的における中性子TDC--QDC相関.}
+    \label{fig:Li_TDCQDCn}
+\end{figure}
+
+\subsection{ガンマピークを基準とした、IAS起因の中性子のTOF決定}
+この節では、先に示した\cref{fig:Al_TDCQDCg_full}から得られる$\gamma$線ピークをもとに、IAS起因の中性子の飛行時間 (Time Of Flight: TOF) を決定する手法について述べる。
+
+先に述べたように、陽子が標的に当たって生成された$\gamma$線起因のピークはTDC 980 Ch.~付近に存在した。
+ここから、生成された$\gamma$線がシンチレータに届いてから次のRF信号が入力されるまでの時間が分かる。
+Time Callibratorによる時間校正の結果から、TDCのチャンネルと時間の対応について、$a = 22.21\, \mathrm{[Ch./ns]}$であることを用いると、
+\begin{equation}
+    \mathrm{TDC}_\gamma = \frac{980 \, \mathrm{[Ch.]} }{22.21\, \mathrm{[Ch./ns]}} \approx 44.12\,\mathrm{[ns]}
+\end{equation}
+である。
+
+また、$\gamma$線は光速で飛行することから、標的からシンチレータまでの距離$L = 7.5344\,\mathrm{[m]}$を用いると、生成されてからシンチレータに届くまでの時間は、$L/c \approx 25.13\,\mathrm{[ns]}$である。
+
+% したがって、陽子ビームが標的に照射されて反応が生じてから、反応によって生じた$\gamma$線がシンチレータに届き次のRF信号が入力されるまでの時間は、
+% \begin{equation}
+%     \frac{L}{c} + \mathrm{TDC}_\gamma \approx 69.26\,\mathrm{[ns]}
+% \end{equation}
+% とわかる。
+
+\enskip
+
+次に、$\gamma$線が届いた後に入力されるRF信号と、中性子が届いた後に入力されるRF信号について、その周期差を検討する。
+
+標的に照射された陽子ビームのエネルギーは高々$T_\mathrm{p} = 50\,\mathrm{[MeV]}$ 程度である。
+陽子のエネルギーがすべて生成される中性子の運動エネルギーに転換されたとしても、中性子と陽子の(静止)質量がほぼ同じことから、中性子の運動エネルギーの上限は高々$T_\mathrm{n} = 50 \,\mathrm{[MeV]}$である。
+従って、このことから飛行時間$\Delta t$に下限を設けることができ、非相対論的に計算すると、
+\begin{equation}
+    \Delta t = \frac{L}{\sqrt{2T_n/m_\mathrm{n}}} \gtrsim 77\,\mathrm{[ns]}.
+\end{equation}
+ここで、RF周期$T_\mathrm{RF} \approx 61.68\,\mathrm{[ns]}$ であるから、最も最速でシンチレータ届いた中性子は、$\gamma$線よりもRF周期が1周期だけ遅れることになる。
+実際、このことから最も早くシンチレータに届いた中性子に対応するTDCのチャンネルを求めると、
+\begin{equation}
+    \mathrm{TDC}_\mathrm{n} = \frac{L}{c} + \mathrm{TDC}_\gamma + T_\mathrm{RF}- \Delta t_\mathrm{min} = 53.94\,\mathrm{[ns]}
+\end{equation}
+より、$a = 22.21\,\mathrm{[Ch./ns]}$を乗じておよそ$1200\,\mathrm{[Ch.]}$となり、確かにTDC--QDC相関において見られた1000-1200 Ch.~付近のエッジに対応することが分かる。
+
+\enskip
+
+先のデータ整形によって、このようなRF周期が$\gamma$線に対して1周期だけ遅れたサンプルのみを抽出しているから、中性子のTDCから飛行時間$\Delta t$を求める式は以下で与えられる。
+\begin{equation}
+    \Delta t = \frac{L}{c} + \mathrm{TDC}_\gamma +  T_\mathrm{RF}  - \mathrm{TDC}_\mathrm{n}\,.\label{eq:TOF_calc}
+\end{equation}
+
+以上の考察を図に纏めたのが以下の\cref{fig:TOF_time_diagram}である。
+\begin{figure}[H]
+    \centering
+    \includegraphics{figs/misc/TOF_time_diagram.pdf}
+    \caption{陽子と標的との衝突によって得られる$\gamma$線と中性子が検出器に届くまでの流れの模式図。中性子は$\gamma$線に対してRF周期が1周期だけ遅れて届いたものとしている。}
+    \label{fig:TOF_time_diagram}
+\end{figure}
+
+\enskip
+
+ここでは、以上の考察に従って得られた中性子TOF--QDC相関を代表的に\ce{Al}標的について\cref{fig:Al_TOFQDCn}に示す。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{figs/root/Al_TOFQDC.pdf}
+    \caption{\ce{Al}標的における中性子TOF--QDC相関.}
+    \label{fig:Al_TOFQDCn}
+\end{figure}
+
+\subsection{IAS励起エネルギーの決定、原子核半径の計算}
+
+前節によって、中性子のTOF$\Delta t$を推定することができた。
+本節では、飛行時間からIAS励起エネルギーについて決定する。
+
+飛行時間から、反応で消費されたエネルギーを求める方法については、先の原理の章で述べたので省略する。
+各サンプルごとに、エネルギーを横軸に、そのカウント数を縦軸としたグラフを\cref{fig:Al_Ex,fig:Ti_Ex,fig:Ag_Ex,Fig:Au_Ex,Fig;Li_Ex}にそれぞれ示す。
+\ce{Ag}を除くすべてのサンプルにピークが見られた。
+このピークがクーロンエネルギー差に対応していると考えられる。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figs/root/Al_Ex.pdf}
+    \caption{\ce{Al}標的における中性子エネルギー分布.}
+    \label{fig:Al_Ex}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figs/root/Ti_Ex.pdf}
+    \caption{\ce{Ti}標的における中性子エネルギー分布.}
+    \label{fig:Ti_Ex}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figs/root/Ag_Ex.pdf}
+    \caption{\ce{Ag}標的における中性子エネルギー分布.}
+    \label{fig:Ag_Ex}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figs/root/Au_Ex.pdf}
+    \caption{\ce{Au}標的における中性子エネルギー分布.}
+    \label{fig:Au_Ex}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figs/root/Li_Ex.pdf}
+    \caption{\ce{Li}標的における中性子エネルギー分布.}
+    \label{fig:Li_Ex}
+\end{figure}
+
+ここから、エネルギーピークの値を求めるために、鋭いピークを持つ\ce{Al}、\ce{Ti}、\ce{Au}標的についてはガウス関数によるフィッティングを行った。
+代表的に、\ce{Al}についてエネルギー分布にフィッティングによる曲線を重ねたものを\cref{fig:Al_Ex_fitting}に示す。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figs/root/Al_Ex_fitting.pdf}
+    \caption{\ce{Al}標的における中性子エネルギー分布とエネルギーピークのガウスフィッティング.}
+    \label{fig:Al_Ex_fitting}
+\end{figure}
+
+\ce{Li}標的については、バンド状のピークが見られたため、ガウスフィッティングを行うことは容易ではない。
+
+このようなピークが見られる要因は、\ce{Li}標的の厚さが他の標的と比べ厚いため、\ce{Li}標的内部で陽子が反応する位置によっては入射エネルギーの減衰が生じるためである。
+従って、このピークの左側が減衰なく反応したときのクーロンエネルギー差に相当する。
+また、これによって理想的にはIAS励起エネルギーによってステップ状のピークが見られるが、後述するような種々の不定性によってガウス関数が畳み込まれたような、鈍ったピークとして観測されている。
+
+そこで、このピークの左側のエッジについて\cref{fig:Li_Ex_fitting}のようにガウスフィッティングを行い、そのガウシアンの半値幅を基にクーロンエネルギー差を決定した。
+このとき、ガウシアンの平均は$2.103 \pm 0.286\,\mathrm{[MeV]}$, 標準偏差は$0.6066 \pm 0.1225\,\mathrm{[MeV]}$であるから、半値幅の右側を取って、クーロンエネルギー差は$1.389 \pm 0.142\,\mathrm{[MeV]}$であると求まる。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{figs/root/Li_Ex_fitting.pdf}
+    \caption{\ce{Li}標的における中性子エネルギー分布とエネルギーピークのガウスフィッティング.}
+    \label{fig:Li_Ex_fitting}
+\end{figure}
+
+以上のようなガウスフィッティングによって得られたクーロンエネルギー差を以下の表に纏める。
+\begin{table}[H]
+    \centering
+    \begin{tabular}{cc}
+        \hline
+         標的原子 & クーロンエネルギー差 $\mathrm{[MeV]}$ \\
+         \hline\hline
+         \ce{Al} & $5.684 \, \pm \, 0.02544$\\
+         \ce{Ti} & $7.965 \, \pm \, 0.04620$\\
+         \ce{Ag} & N/A\\
+         \ce{Au} & $18.43 \, \pm \, 0.03669$\\
+         \ce{Li} & $1.389 \,\pm \, 0.1420$ \\
+         \hline 
+    \end{tabular}
+    \caption{Caption}
+    \label{tab:energy_perks}
+\end{table}
+
+% 核半径の計算
+以上により、クーロンエネルギーが得られたため、これから原子核半径を求めることができる。
+その結果を以下の表に纏める。
+\begin{table}[H]
+    \centering
+    \begin{tabular}{cc}
+        \hline
+        標的原子 &  原子核半径 $\mathrm{[fm]}$\\
+         \hline\hline
+         \ce{Al} & $4.104 \, \pm \, 0.018$\\
+         \ce{Ti} & $4.881 \, \pm \, 0.028$\\
+         \ce{Ag} & N/A\\
+         \ce{Au} & $7.453 \, \pm \, 0.015$\\
+         \ce{Li} & $3.425\,\pm \, 0.2755$ \\
+         \hline 
+    \end{tabular}
+    \caption{Caption}
+    \label{tab:placeholder}
+\end{table}
+
+ここで、原子核半径$R$と質量数$A$には$R = A^{1/3}$の関係がある。
+そこで、$A^{1/3}$と$R$の相関を次の\cref{fig:cbrt_A_vs_R}に示す。
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{figs/graph/nucleus_radius_vs_A_cbrt.pdf}
+    \caption{Caption}
+    \label{fig:cbrt_A_vs_R}
+\end{figure}
+
+不定性の大きい\ce{Li}を除いた\ce{Al}、\ce{Ti}、\ce{Au}の原子については、線形の関係になっていることが分かった。
+
+\section{考察}
+本節では、実験結果を踏まえ、以下の3点について考察を行う。
+\begin{itemize}
+    \item 実験装置によって生じる誤差
+    \item Ag標的においてIASによるピークが見られなかった要因
+    \item TDC vs QDCのグラフに表れている信号の意味
+\end{itemize}
+
+\subsection{実験装置によって生じる誤差}
+実験装置に起因する誤差の一つとして、液体シンチレータ内における中性子とシンチレータとの反応位置の不確定性が挙げられる。
+\cref{fig:シンチレータ}に示すように、液体シンチレータは中性子の進行方向に対して$50.8\,\mathrm{mm}$の幅をもつ。
+したがって、ターゲットからシンチレータまでの距離には$\pm 25.4\,\mathrm{mm}$の位置不確定性が存在すると考えられる。
+
+この位置の誤差のクーロンエネルギー差$E_{\text{c}}$および原子半径$R$への伝搬の過程を以下に示す。
+
+\begin{enumerate}
+    \item \textbf{速度$\beta$への誤差伝搬}
+    \begin{align*}
+        d\beta &= \left| \frac{\partial}{\partial L}\left( \frac{L}{tc} \right) \right| d L \\
+        &= \frac{d L}{tc}
+    \end{align*}
+
+    \item \textbf{中性子運動エネルギー$T_\text{n}$への誤差伝搬}
+    \begin{align*} 
+        d T_\text{n} &= \left| \frac{\partial}{\partial \beta} 
+        \left( \frac{m_n}{\sqrt{1 - \beta^2}} - m_n \right) \right| d \beta \\
+        &= \frac{m_n \beta}{(1-\beta^2)^{\frac{3}{2}}} \cdot \frac{d L}{tc}
+    \end{align*}
+
+    \item \textbf{クーロンエネルギー差$\Delta E_\text{c}$への誤差伝搬}
+    \begin{align*} 
+        d(\Delta E_\text{c}) &= 
+        \left| \frac{\partial}{\partial T_\text{n}} (T_\text{p} - T_\text{n}) \right| d T_\text{n} \\
+        &= d T_\text{n} \\
+        &= \frac{m_n \beta}{(1-\beta^2)^{\frac{3}{2}}} \cdot \frac{d L}{tc}
+    \end{align*}
+
+    \item \textbf{原子半径$R$への誤差伝搬}
+    \begin{align*}
+        d R &= \left| \frac{\partial}{\partial E_\text{c}} 
+        \left[ \frac{3e^2}{20 \pi \epsilon_0 E_\text{c}}(2Z + 1) \right] \right| d(\Delta E_\text{c}) \\
+        &=  \frac{3e^2(2Z + 1)}{20 \pi \epsilon_0 {E_\text{c}}^2} 
+        \cdot \frac{m_\text{n} \beta}{(1-\beta^2)^{\frac{3}{2}}} 
+        \cdot \frac{d L}{tc}
+    \end{align*}
+\end{enumerate}
+
+また、実験装置に起因する誤差として、ターゲット内での反応位置による中性子のエネルギー$T_\text{n}$の不確定性が挙げられる。
+\cref{fig:react_surface}に示すように、ターゲット表面で反応した場合には、放出される中性子とターゲット物質との相互作用はほとんど無視できるため、エネルギーの減衰を考慮する必要はない。
+一方で、\cref{fig:react_inside}のようにターゲット内部で反応が起こった場合、入射陽子は荷電粒子であるためターゲット原子とのクーロン相互作用によってエネルギーを失いながら進行し、反応時点での陽子のエネルギーは入射時よりも減衰していると考えられる。
+したがって、同一入射条件下でも反応位置の違いにより中性子の放出エネルギーに不確定性が生じる。
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.48\columnwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figs/misc/physics_exp3_target_1.pdf}
+    \caption{ターゲット表面で反応した場合}
+    \label{fig:react_surface}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.48\columnwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figs/misc/physics_exp3_target_2.pdf}
+    \caption{ターゲット内部で反応した場合}
+    \label{fig:react_inside}
+  \end{minipage}
+\end{figure}
+
+ターゲット内部でのエネルギー減衰の大きさはターゲット厚さに依存するため、\cref{厚さの表}に示した各ターゲット厚さをもとに、入射陽子がターゲット表面から通過した場合に失う最大の減衰エネルギー$E_\text{d}$をLISE++を用いて算出した。
+結果を\cref{tab:max_decay_energy}に示す。
+
+\begin{table}[H]
+    \centering
+    \caption{各ターゲットの最大の入射陽子の減衰エネルギー}
+    \begin{tabular}{c|c}
+        \hline
+        ターゲットの種類 & 最大の減衰エネルギー$E_\text{d}$[$\mathrm{MeV}$] \\
+        \hline
+        \hline
+        \ce{Al} & $0.0264$ \\
+        \ce{Ti} & $0.6245$ \\
+        \ce{Ag} & $0.3075$ \\
+        \ce{Au} & $0.2298$ \\
+        \ce{Li} & $5.8803$ \\
+        \hline
+    \end{tabular}
+    \label{tab:max_decay_energy}
+\end{table}
+
+ここで得られた$E_\text{d}$は、ターゲット内部で反応が最も深い位置で起こった場合に、入射陽子が持つエネルギーの最大減衰量を意味する。
+この減衰により、生成される中性子の運動エネルギー$T_\text{n}$は、表面反応時に比べて小さくなる。
+したがって、この効果は一方向性の誤差として扱うのが適切である。
+$\Delta E_\text{c}$のどちらの方向に影響するかを考えると、次式より、$E_\text{d}$が大きいほど$\Delta E_\text{c}$は大きく見積もられることがわかる。
+\begin{equation*}
+    E_\text{c} = T_\text{p} - (T_\text{n} - E_\text{d}) = (T_\text{p} - T_\text{n}) + E_\text{d}
+\end{equation*}
+したがって、$E_\text{d}$による誤差は$\Delta E_\text{c}$の上側のみに寄与する。
+これを踏まえ、先と同様の方法で$E_\text{n}$に対する$+E_\text{d}$の誤差伝搬を計算すると、次式のように表される。
+
+\begin{align*}
+    d(\Delta E_\text{c}) &= 
+    \frac{{m_\text{n}}^3 \beta}{(1-\beta^2)^{\frac{3}{2}}} 
+    \cdot \left(1 - \frac{m_\text{n}}{T_\text{n}+m_\text{n}} \right)^{-\frac{1}{2}} 
+    \cdot \frac{1}{(T_\text{n} + m_\text{n})^3} E_\text{d} \\
+    d R &=  
+    \frac{3e^2(2Z + 1)}{20 \pi \epsilon_0 {E_\text{c}}^2} 
+    \cdot \frac{{m_\text{n}}^3 \beta}{(1-\beta^2)^{\frac{3}{2}}} 
+    \cdot \left(1 - \frac{m_\text{n}}{T_\text{n}+m_\text{n}} \right)^{-\frac{1}{2}} 
+    \cdot \frac{1}{(T_\text{n} + m_\text{n})^3} E_\text{d}
+\end{align*}
+
+このように、シンチレータ内の反応位置の不確定性による対称的な誤差と、ターゲット内部でのエネルギー減衰に起因する一方向性の誤差を合わせて考慮することで、実験装置全体に起因する不確定性を見積もることができる。これら2つの誤差要因は物理的に独立であるため、それぞれの二乗和平方根をとることで合成し、実験装置に由来する総合の誤差として算出した。
+ただし、ターゲット内部での反応位置によるエネルギー減衰の影響は一方向性の効果であるため、上側誤差のみに加算して評価した。
+
+以上の方法により、IASのピークが観測できなかった\ce{Ag}およびピークに幅が見られた\ce{Li}を除く各ターゲットについて、クーロンエネルギー差$\Delta E_\text{c}$および原子半径$R$の実験装置に起因する誤差を算出した結果を\cref{tab:err_exp}に示す。
+
+
+\begin{table}[H]
+    \centering
+    \caption{各ターゲットの実験装置に起因するクーロンエネルギー差$\Delta E_\text{c}$および原子半径$R$の誤差}
+    \begin{tabular}{c|cc|cc}
+        \hline
+        \multirow{2}{*}{ターゲット} & \multicolumn{2}{c|}{$d(\Delta E_\text{c})$ [MeV]} & \multicolumn{2}{c}{$dR$ [fm]} \\
+        \cline{2-5}
+         & $+$側 & $-$側 & $+$側 & $-$側 \\
+        \hline\hline
+        \ce{Al} & $0.313$ & $0.311$ & $0.226$ & $0.225$ \\
+        \ce{Ti} & $0.922$ & $0.294$ & $0.565$ & $0.180$ \\
+        \ce{Au} & $0.387$ & $0.215$ & $0.157$ & $8.69 \times 10^{-2}$ \\
+        \hline
+    \end{tabular}
+    \label{tab:err_exp}
+\end{table}
+
+
+一方、\ce{Li}については、ターゲット内での反応位置による不確定性は\cref{fig:Li_Ex}に示すようにバンドとして現れており、その端点を解析の段階で既に考慮している。
+したがって、本節ではシンチレータ内の反応位置に起因する不確定性のみを考慮すると実験装置によって生じる誤差は以下のようになる。
+\begin{align*}
+    d(\Delta E_\text{c}) &= \pm 3.44 \times 10^{-1} \, [\mathrm{MeV}] \\
+    dR &= 1.08 \, [\mathrm{fm}]
+\end{align*}
+
+解析結果と二乗和平方根を用いて合成し、$Ag$を除く各ターゲットの誤差をまとめた結果を\cref{tab:err_all}に示す。
+
+\begin{table}[H]
+    \centering
+    \caption{各ターゲットのクーロンエネルギー差$\Delta E_\text{c}$、原子半径$R$の誤差}
+    \begin{tabular}{c|cc|cc}
+        \hline
+        \multirow{2}{*}{ターゲット} & \multicolumn{2}{c|}{$d(\Delta E_\text{c})$ [MeV]} & \multicolumn{2}{c}{$dR$ [fm]} \\
+        \cline{2-5}
+         & $+$側 & $-$側 & $+$側 & $-$側 \\
+        \hline\hline
+        \ce{Al} & & & & \\
+        \ce{Ti} & & & & \\
+        \ce{Au} & & & & \\
+        \hline
+    \end{tabular}
+    \label{tab:err_all}
+\end{table}
+
+
+\subsection{\ce{Ag}標的においてIASによるピークが見られなかった要因}
+天然の\ce{Ag}は、他の4つのターゲット元素と異なり、\cref{tab:Ag_isotope}に示すように、安定な同位体として$^{107}$\ce{Ag}および$^{109}$\ce{Ag}の2種類を含む。このため、もし実験装置のエネルギー分解能が十分であれば、IAS遷移に対応する中性子ピークは二つに分かれ、それぞれのピーク強度は単一ピークの約半分になることが予想される。すると、これらのピークは他の励起準位に由来する中性子信号に埋もれてしまい、観測が困難になる可能性がある。
+
+\begin{table}[H]
+    \centering
+    \caption{\ce{Ag}の天然同位体の存在比}
+    \begin{tabular}{cc}
+        \hline
+        同位体 & 存在比 \\
+        \hline
+        \hline
+        $^{107}$\ce{Ag} & 51.8\% \\
+        $^{109}$\ce{Ag} & 48.2\% \\
+        \hline
+    \end{tabular}
+    \label{tab:Ag_isotope}
+\end{table}
+
+各同位体がIASに遷移することによって上昇するクーロンエネルギー$\Delta E_\mathrm{c}$を既存データから\cref{tab:Ag_iso_Ec}に示す。
+
+\begin{table}[H]
+    \centering
+    \caption{\ce{Ag}の同位体がIASに遷移することによるクーロンエネルギー上昇 \cite{Ag_iso_Ec}}
+    \begin{tabular}{cc}
+        \hline
+        同位体 & $\Delta E_\mathrm{c}$ [MeV] \\
+        \hline
+        \hline
+        $^{107}$\ce{Ag} & 6.133 \\
+        $^{109}$\ce{Ag} & 6.437 \\
+        \hline
+    \end{tabular}
+    \label{tab:Ag_iso_Ec}
+\end{table}
+
+このデータを用いて、ターゲットから検出器に到達するまでにかかる時間$t$を計算すると、\cref{tab:Ag_iso_t}のようになる。
+
+\begin{table}[H]
+    \centering
+    \caption{\ce{Ag}の同位体がIASに遷移することによって生成する中性子の検出器到達時間}
+    \begin{tabular}{cc}
+        \hline
+        同位体 & $t$ [ns] \\
+        \hline
+        \hline
+        $^{107}$\ce{Ag} & 86.19 \\
+        $^{109}$\ce{Ag} & 86.48 \\
+        \hline
+    \end{tabular}
+    \label{tab:Ag_iso_t}
+\end{table}
+
+これより、$^{107}$\ce{Ag}と$^{109}$\ce{Ag}では到達時間の差が約$0.29\,\mathrm{ns}$であることがわかる。今回の実験では、TDCの1チャンネルあたりの時間幅は約$0.045\,\mathrm{ns}$であり、この差は十分に分解可能であると考えられる。したがって、時間分解能の観点からは、二つの同位体のIASピークを識別できるはずである。
+
+しかしながら、実際の観測では明瞭なIASピークは確認できなかった。これは、二つの同位体に対応するピーク強度がそれぞれ半分となり、かつ他の励起準位に由来する中性子信号に埋もれたためであると考えられる。したがって、\ce{Ag}標的においてIASピークが観測されなかった主因は、同位体によるピーク分散と信号との重なりにあると結論できる。
+
+
+
+\subsection{TDC--ADC相関図に表れている信号の意味}
+本節では、TDC--ADC相関図に観測された信号について、その起源をガンマ線、荷電粒子、および中性子の三種類の粒子に分類して考察する。例として、\ce{Al}標的におけるTDC--ADC相関図を各信号に分類した結果を\cref{fig:Al_TDC-ADC_separated}に示す。
+
+\begin{figure}[hbtp]
+    \centering
+    \includegraphics[width=0.5\linewidth]{figs/graph/Al_TDCQDC_separated_comp.pdf}
+    \caption{\ce{Al}標的におけるTDC--ADC相関図の信号ごとの分類結果}
+    \label{fig:Al_TDC-ADC_separated}
+\end{figure}
+
+\paragraph{ガンマ線の信号}
+TDC--ADC相関図において、最初に観測される明瞭なピーク（\cref{fig:Al_TDC-ADC_separated}の①-1）は、主に陽子捕獲反応に伴って放出されるガンマ線による信号であると考えられる。ガンマ線は光速という一定の速度で検出器に到達するため、TDC上でピークをもって測定されたと考えられる。  
+
+一方、時間全域にわたって広がりを持つ成分（\cref{fig:Al_TDC-ADC_separated}の①-2）は、励起した原子核が脱励起する際に放出するガンマ線に対応していると考えられる。このガンマ線は、異なる寿命をもつ複数の励起準位からの遷移が重なって観測される、時間的に連続的な分布を示すためである。
+
+さらに、\cref{fig:Al_TDCQDC}に示すように、主ピークの後に別のピークが現れる場合がある（\cref{fig:Al_TDC-ADC_separated}の①-3）。このピークは、入射陽子がターゲットで反応せずに通過し、ビームダンプに到達した際に発生した二次的ガンマ線が検出されたものであると考えられる。観測された2つ目のピークは1つ目のピークより約$400\,\mathrm{ch}$遅れており、TDCのチャンネルと時間の関係について$22.21\,\mathrm{ns/ch}$を用いると約$18\,\mathrm{ns}$の遅延に相当する。
+
+この時間差をターゲットからビームダンプを経て検出器に到達するまでの陽子の飛行時間として見積もる。陽子の速度$\beta c$は、運動エネルギー$T_\text{p}$と静止質量$m_\text{p}$の関係から
+\begin{align*}
+    T_\text{p} &= (\gamma - 1) m_\text{p} c^2, \\
+    \therefore \beta &= \sqrt{1 - \left( \frac{m_\text{p} c^2}{T_\text{p} + m_\text{p} c^2} \right)^2} \approx 0.3106
+\end{align*}
+と求められる。このとき、\cref{ビームダンプ}を見るとターゲットからビームダンプまでの距離は約$2.1\,\mathrm{m}$であるため、$T_\text{p} = 50 \,\mathrm{MeV}$と仮定すると飛行時間は
+\begin{equation*}
+    t = \frac{2.1}{\beta c} \approx 22\,\mathrm{ns}
+\end{equation*}
+となり、測定値とおおむね一致する。このことから、2つ目のピークがビームダンプ起源のガンマ線であるという考えは妥当であるだろう。
+
+\paragraph{荷電粒子の信号}
+TDC--ADC相関図の中で、TDCおよびADCの両方で明瞭なピークを示す信号（\cref{fig:Al_TDC-ADC_separated}の②）は、荷電粒子によるものであると考えられる。荷電粒子はBetheの式（\cref{betheの式}）に示されるように、ガンマ線や中性子に比べシンチレータ中で大きなエネルギー損失を生じ、ADC値が明瞭なピークを形成するためである。また、この信号は$T_\text{RF}$と同周期で出現することから、陽子ビームと同期して放出されていることがわかる。
+
+\cref{ビームダンプ}に示す実験配置を考慮すると、遮蔽物を通過しにくい荷電粒子が検出器に到達する場合、主にターゲット側から入射したものに限られる。したがって、この信号は陽子入射に伴って生成された粒子である可能性が高い。ただし、本実験のデータのみから粒子種を特定することは困難であると考えられる。
+
+また、荷電粒子のピークから左下に伸びている直線の信号についても、その要因となる現象・粒子の推定が困難であった。
+
+\paragraph{中性子の信号}
+TDC--ADC相関図上で広く分布し、曲線状の境界をもつ成分(\cref{fig:Al_TDC-ADC_separated}の③)は中性子による信号であると考えられる。これは主として$(n,p)$反応に由来し、反応によって生成される中性子のエネルギーが、ターゲット核内の励起準位に依存して異なるため、検出までの飛行時間が広く分布していると考えられる。
+
+また、ADC軸方向に分布をもつ理由は、中性子が電荷を持たず、シンチレータ中でのエネルギー損失が小さいことが影響していると考えられる。Betheの式からも明らかなように、電荷を持たない中性子は全エネルギーをシンチレータ内で失わず、エネルギーを持ったまま通り過ぎる場合がある。その結果、ADC値に幅をもつ分布が形成される。
+
+さらに、TDCとADCの間に見られる曲線状の境界は、中性子の飛行時間と運動エネルギーの間に相関があることに由来すると考えられる。中性子の速度$\beta c$と運動エネルギー$T_\text{n}$の間には、相対論的な関係式
+\begin{equation*}
+    T_\text{n} = (\gamma - 1)m_\text{n} c^2 = m_\text{n} c^2 \left( \frac{1}{\sqrt{1 - \beta^2}} - 1 \right)
+\end{equation*}
+が成り立つ。したがって、飛行距離$L$を一定とすれば飛行時間$t$は
+\begin{equation*}
+    t = \frac{L}{\beta c}
+\end{equation*}
+で与えられるため、TDC（飛行時間）とADC（エネルギー）との間に非線形な関係
+\begin{equation*}
+    t \propto \frac{1}{\sqrt{1 - \left( 1 + \frac{T_\text{n}}{m_\text{n} c^2} \right)^{-2}}}
+\end{equation*}
+が生じる。この関係に沿って分布が曲線状に現れると考えられる。
+
+
+
+% これは原理に書くべきかも
+% そして、中性子の信号の中にピークが出ているが、これがターゲットがIASとなることで放出された中性子のエネルギーに対応していると考えられる。IASは原子核内の中性子を同じ軌道の陽子に置き換えたという点以外すべてが同じ状態である。中性子が陽子に置き換わるとき、同じ軌道に行きやすいという性質があるため、IASに対応する中性子のエネルギーでピークが見られたと考えられる。
+
+
+
+
+\section{結論}
+今回の実験では、IASの観測と核半径の推定を目標としていた。\ce{Ag}ではIASのピークを観測することができなかったが、\ce{Al}、\ce{Ti}、\ce{Au}、\ce{Li}ではIASのピークを観測することができた。そのピークの値をもとに、核半径の値を誤差$2\%$以下の精度で推定することができた。よって、この実験を通して当初の目標を達成できたといえるだろう。
+
+
+% 参考文献は、各課題に合わせて必要なものに書き換えること
+\begin{thebibliography}{9}
+
+    \bibitem{Ag_iso_Ec}
+        C. G. SHUGART, J. R. CURRY, G. A. LOCK P. A. MOORE, and P. J. RILEY
+        Isobaric-Analog Studies with $^{107}$\ce{Ag} and $^{109}$\ce{Ag}  (1968) p.4
+    
+    % \bibitem{bunken1}
+    %     A. Einstein, B. Podolsky, and N. Rosen, 
+    %     Phys. Rev. \textbf{47}, (1935) 777.
+    %     % いわゆるEPRパラドックスと呼ばれる量子力学に関する論文
+    
+\end{thebibliography}
+
+\end{document}

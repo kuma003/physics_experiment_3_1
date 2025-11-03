@@ -1,0 +1,7 @@
+*.aux
+*.dvi
+*.fls
+*.out
+*.log
+*.fdb_latexmk
+*.synctex.gz
