@@ -21,12 +21,14 @@ TFile *hfile;
 // Definitions of constants 
 // Useful link: https://physics.nist.gov/cuu/Constants/Table/allascii.txt
 Double_t   cc  = 0.299792458;  // Speed of light [m/ns]
-Double_t   mn  = 938.272013;   // Neutron mass [MeV/c2]
-Double_t   mp  = 939.565346;   // Proton mass [MeV/c2]
+Double_t   mp  = 938.272013;   // Proton mass [MeV/c2]
+Double_t   mn  = 939.565346;   // Neutron mass [MeV/c2]
 Double_t   tp  = 48.81;        // kinetic energy of incident proton [MeV]
 Double_t   trf = 1.0/16.2344e6 * 1.0e9;       // RF period [ns]
 Double_t   fpl = (7507.0 + 2.0 + 50.8/2.0)/1000.0; // Distance from target to detector [m]
+Double_t   fpl_err = 25.4 / 1000.0; // Uncertainty in fpl [m]
 Double_t   ch2ns = 1.0/22.2105; /*?*/   // Conversion factor from channel to nsec [ns/ch]
+Double_t   ch2ns_err = 0.01681 / (22.2105*22.2105); /*?*/ // Error of the conversion factor [ns/ch]
 Double_t   qthpsd = 900.0; // qdc software threshold for psd [ch]
 Double_t   qthex  = 0.0;/*?*/ // qdc software threshold for ex  [ch]
 
@@ -36,6 +38,7 @@ TH2F *hQDC2, *hQDC2e, *hQDC2c;
 TH2F *hTDCQDC, *hTDCQDCg, *hTDCQDCn;
 TH2F *hTOFQDC, *hTOFQDCg, *hTOFQDCn;
 TH1F *hEx;
+TH1F *hExSmear;
 string atom_name = "hoge";
 string saveFigPath = "img/";
 
@@ -99,6 +102,9 @@ int anainit(string hstFileName){
   hEx = new TH1F("hEx", (atom_name + "Ex").c_str() , 400, -10.0, 30.0);
   hEx->GetXaxis()->SetTitle("Energy [MeV]");
   hEx->GetYaxis()->SetTitle("Count [-]");
+  hExSmear = new TH1F("hExSmear", (atom_name + "Ex").c_str() , 400, -10.0, 30.0);
+  hExSmear->GetXaxis()->SetTitle("Energy [MeV]");
+  hExSmear->GetYaxis()->SetTitle("Count [-]");
 
   return 0;
 }
@@ -139,6 +145,19 @@ int anaexec(int event_size, unsigned short *anabuff){
   Double_t tn = mn * gamman - mn; /*?*/       // kinetic energy of neutron
   Double_t ex = tp - tn; /*?*/       // excitation energy
 
+  // calc uncertainty in TOF due to tdc channel uncertainty
+  
+  // TOF uncertainty propagation
+  Double_t tof0_err = sqrt(pow(fpl_err / cc, 2) + pow(980 * ch2ns_err, 2));
+  Double_t tof_err  = sqrt( pow(tdc * ch2ns_err, 2) + pow(tof0_err, 2) );
+  
+  // Neutron energy uncertainty propagation
+  Double_t betan_err = sqrt( pow( (fpl / (cc * tof * tof)) * tof_err , 2) + pow( (1.0 / (cc * tof)) * fpl_err , 2) );
+  Double_t gamman_err = betan / pow(1.0 - betan * betan, 3.0/2.0) * betan_err;
+  Double_t tn_err = mn * gamman_err; // assuming no uncertainty in mn
+  Double_t ex_err = tn_err; // assuming no uncertainty in tp
+
+
   // Fill in the histograms
   if(! (qdc>0.0)) return 0;  // If qdc is not recorded, skip the event.
 
@@ -162,7 +181,26 @@ int anaexec(int event_size, unsigned short *anabuff){
   if(fNeutron) hTOFQDCn->Fill(tof,qdc);
   if(fGamma  ) hTOFQDCg->Fill(tof,qdc);
 
-  if(qdc>qthex && fNeutron) hEx->Fill(ex);
+  if(qdc>qthex && fNeutron) {
+    hEx->Fill(ex);
+
+    const int    Nsigma = 6;
+    const int    nb = hExSmear->GetNbinsX();
+    const double bw = hExSmear->GetBinWidth(1);
+    int bmin = hExSmear->FindFixBin(ex - Nsigma*ex_err);
+    int bmax = hExSmear->FindFixBin(ex + Nsigma*ex_err);
+    bmin = std::max(bmin, 1);
+    bmax = std::min(bmax, nb);
+
+    // 規格化済みガウス（TMath::Gaus(..., norm=true)）×bin幅 を重みとして Fill
+    for (int b = bmin; b <= bmax; ++b) {
+      double xc  = hExSmear->GetBinCenter(b);
+      double pdf = TMath::Gaus(xc, ex, ex_err, /*norm=*/true);
+      double w   = pdf * bw;
+      hExSmear->Fill(xc, w);
+    }
+  }
+
 
   return 0;
 }
