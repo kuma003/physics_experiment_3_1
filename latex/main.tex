@@ -545,20 +545,21 @@ Time Callibratorによる時間校正の結果から、TDCのチャンネルと�
 \cref{fig:liquid_scintillator}に示すように、液体シンチレータは中性子の進行方向に対して$50.8\,\mathrm{mm}$の幅をもつ。
 したがって、ターゲットからシンチレータまでの距離には$\pm 25.4\,\mathrm{mm}$の位置不確定性が存在すると考えられる。
 
-この位置の誤差のクーロンエネルギー差$E_{\text{c}}$および原子半径$R$への伝搬の過程を以下に示す。
+この位置の誤差のクーロンエネルギー差$E_{\text{c}}$および原子半径$R$への伝搬の過程を以下に示す。ただし、\cref{eq:TOF_calc}より飛行時間$t$は$L$に依存しているので、その点に注意して計算を行った。
 
 \begin{enumerate}
     \item \textbf{速度$\beta$への誤差伝搬}
     \begin{align*}
         d\beta &= \left| \frac{\partial}{\partial L}\left( \frac{L}{tc} \right) \right| d L \\
-        &= \frac{d L}{tc}
+        &= \left| \frac{1}{tc} - \frac{L}{t^2c} \frac{\partial t}{\partial L} \right| dL \\
+        &= \left( 1 - \frac{L}{tc} \right) \frac{d L}{tc}
     \end{align*}
 
     \item \textbf{中性子運動エネルギー$T_\text{n}$への誤差伝搬}
     \begin{align*} 
         d T_\text{n} &= \left| \frac{\partial}{\partial \beta} 
         \left( \frac{m_n}{\sqrt{1 - \beta^2}} - m_n \right) \right| d \beta \\
-        &= \frac{m_n \beta}{(1-\beta^2)^{\frac{3}{2}}} \cdot \frac{d L}{tc}
+        &= \frac{m_n \beta}{(1-\beta^2)^{\frac{3}{2}}} \cdot \left( 1 - \frac{L}{tc} \right)\frac{d L}{tc}
     \end{align*}
 
     \item \textbf{クーロンエネルギー差$\Delta E_\text{c}$への誤差伝搬}
@@ -566,7 +567,7 @@ Time Callibratorによる時間校正の結果から、TDCのチャンネルと�
         d(\Delta E_\text{c}) &= 
         \left| \frac{\partial}{\partial T_\text{n}} (T_\text{p} - T_\text{n}) \right| d T_\text{n} \\
         &= d T_\text{n} \\
-        &= \frac{m_n \beta}{(1-\beta^2)^{\frac{3}{2}}} \cdot \frac{d L}{tc}
+        &= \frac{m_n \beta}{(1-\beta^2)^{\frac{3}{2}}} \cdot \left( 1 - \frac{L}{tc} \right)\frac{d L}{tc}
     \end{align*}
 
     \item \textbf{原子半径$R$への誤差伝搬}
@@ -575,9 +576,10 @@ Time Callibratorによる時間校正の結果から、TDCのチャンネルと�
         \left[ \frac{3e^2}{20 \pi \epsilon_0 E_\text{c}}(2Z + 1) \right] \right| d(\Delta E_\text{c}) \\
         &=  \frac{3e^2(2Z + 1)}{20 \pi \epsilon_0 {E_\text{c}}^2} 
         \cdot \frac{m_\text{n} \beta}{(1-\beta^2)^{\frac{3}{2}}} 
-        \cdot \frac{d L}{tc}
+        \cdot \left( 1 - \frac{L}{tc} \right)\frac{d L}{tc}
     \end{align*}
 \end{enumerate}
+
 
 また、実験装置に起因する誤差として、ターゲット内での反応位置による中性子のエネルギー$T_\text{n}$の不確定性が挙げられる。
 \cref{fig:react_surface}に示すように、ターゲット表面で反応した場合には、放出される中性子とターゲット物質との相互作用はほとんど無視できるため、エネルギーの減衰を考慮する必要はない。
