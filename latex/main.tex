@@ -64,14 +64,14 @@
 % コメントを希望する場合は、何について聞きたいかを具体的に書いて下さい。
 
 % 縦方向の空白を挿入するコマンドです。em は行の高さ分、を意味する単位です。
-\vspace{2em}
-\begin{center}
-    \begin{minipage}{0.5\linewidth}
-        レポートのコメントを希望します。
+% \vspace{2em}
+% \begin{center}
+%     \begin{minipage}{0.5\linewidth}
+%         レポートのコメントを希望します。
 
-        具体的には、○○について評価を下さい。
-    \end{minipage}
-\end{center}
+%         具体的には、○○について評価を下さい。
+%     \end{minipage}
+% \end{center}
 
 \vspace{5em}  
 
@@ -80,12 +80,15 @@
 % 物理の分野では、概要では段落分けをしません。
 %
 \begin{abstract}
+    本実験では、アイソバリックアナログ状態（IAS）の観測を通じて原子核半径の推定を行った。ターゲットとしてAl、Ti、Ag，Au，Liを用い、約50MeVの陽子ビームを入射した。中性子の飛行時間を測定することでIASの励起エネルギーを算出し、そこから原子核半径を推定した。その結果，\ce{Ag}を除く各ターゲットに対して以下の原子核半径を得ることができ，実験の目的である原子半径の推定を達成したと言える。Al: 3.07±0.12 fm、Ti: 3.59±0.14 fm、Au: 5.23±0.20 fm、Li: 2.43±0.10 fm。
 \end{abstract}
 
 % 強制的に改ページを行う
 \newpage
 
 \section{目的}
+本実験の目的はアイソバリックアナログ状態（IAS）の観測を通じて原子核半径の推定をすることである。
+
 \section{原理}
 \subsection{アイソバリックアナログ状態(IAS)}
 アイソバリックアナログ状態(IAS, Isobaric Analog State)とは、原子核内の中性子を同じ軌道の陽子に入れ替えて作られる状態である。同じ軌道の陽子と中性子は対称性を持ち、もしクーロン力が無ければ、IASは元の状態と等しいエネルギーを持つ。実際にはクーロン力の分だけエネルギーが上昇して観測され、本実験ではこの励起エネルギーを観測により求める。
@@ -129,42 +132,95 @@
     E_x=(m_p+T_p)-(m_n+T_n)
     \label{eq:励起エネルギー2}
 \end{equation}
-となる。$m_p,\quad m_n$は文献値を用い、$T_p$は加速器の出射エネルギーを代入する。測定によって$T_n$を求めることで励起エネルギーを算出する。具体的には、
+となる。$m_p,\quad m_n$は文献値を用い、$T_p$は加速器の出射エネルギーを代入する。運動エネルギーは式\ref{eq:運動エネルギー}のように与えられ、式中の$\beta$が分かれば$T_n$を計算できる。
 \begin{align}
-    T_n&=\frac{1}{2}m_nv^2\notag\\
-    v&=\frac{L}{\Delta t}
+    T_n&=(\gamma-1)m_nc^2\notag\\
+    &=m_nc^2\left(\frac{1}{\sqrt{1-\beta^2}}-1\right)
+\label{eq:運動エネルギー}
 \end{align}
+    ここで、中性子の速度$\beta c$と飛行距離$L$、および飛行時間$\Delta t$には以下の関係がある。
+    \begin{equation}
+        \beta c=\frac{L}{\Delta t}
+    \end{equation}
+    本実験では、飛行時間$\Delta t$を測定することで運動エネルギーを算出する。飛行時間の測定には加速器の特性を利用する。加速器は一定周期で加速しており、加速のタイミングに合わせて通称「RF信号」と呼ばれる信号が出ている。図\ref{fig:飛行時間}のように、標的からは確率的に中性子か$\gamma$線が放出されている。$\gamma$線が検出されてから直後のRF信号までの時間を$\text{TDC}_{\gamma}$、中性子の場合を$\text{TDC}_n$とし、両者が検出された直後のRF信号は何周期か差があったとする。このとき、飛行時間は
+    \begin{align}
+        \Delta t&=\frac{L}{c}+\text{TDC}_{\gamma}+k\times T_{RF}-\text{TDC}_n\\
+        (k&=0,1,2\cdots)
+    \end{align}
+    と書ける。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{figs/misc/TOF.pdf}
+    \caption{飛行時間の測定についての概念図。RF信号を用いて$\Delta t$を決定する。}
+    \label{fig:飛行時間}
+\end{figure}
     
 \subsection{液体シンチレータと中性子ーガンマ線弁別}
 液体シンチレータは中性子とγ線の弁別が可能である。\\
-液体シンチレータで観測される波形は、中性子とγ線で異なる。下図の写真を見るとおり中性子とγ線の波形を比べたとき、$Q(\mathrm{Tail})/Q(\mathrm{Full})$の値が大きい方が中性子、$Q(\mathrm{Tail})/Q(\mathrm{Full})$の値が小さい方がγ線である。\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{figs/misc/PSD.png}
+    \caption{PSDにおける中性子とγ線の弁別}
+    \label{fig:placeholder}
+\end{figure}
+上図のとおり液体シンチレータで観測される波形は、中性子とγ線で異なる。出力シグナルの時間積分、つまり電荷$Q$について、$Q(\mathrm{Tail})/Q(\mathrm{Full})$の値が大きい方が中性子、$Q(\mathrm{Tail})/Q(\mathrm{Full})$の値が小さい方がγ線である。\\
+
 これはγ線はシンチレータ内で電子が反跳しているのに対して、中性子は陽子が反跳していることに起因する。\\
 液体シンチレータ中の単位長さ当たりのエネルギ－損失は、Betheの式によると
 \begin{align}
     -\frac{dE}{dx}=2\pi N_a r_e^2 m_e c^2 \rho \frac{Z}{A}\frac{z^2}{\beta}\left[\ln\left(\frac{2m_e \gamma^2 v^2 W_{\mathrm{max}}}{I^2}\right)-2\beta^2-\delta-2\frac{C}{Z}\right]
-    \label{eq:Bethe}
+    \label{eq:bethe}
 \end{align}
 と表現できる。この式から
 \begin{equation}
     \frac{dE}{dx}\propto \beta^{-2}
 \end{equation}
 がわかる。同エネルギーの陽子・電子が検出器内部を走る場合、陽子の方がエネルギー損失の大きさが大きい。\\
-有機シンチレータの発光は
+これはつまり陽子の通過軌跡周辺の狭い領域で励起分子の密度が大きくなることを意味する。このことから励起分子同士で相互作用が起こり、スピン三重項状態が生成される割合が大きくなる。そして2つの三重項状態の分子同士での衝突（三重項消滅）が起こりやすくなり、一方の分子は基底状態にもう一方の分子は励起一重項状態に遷移する。その後、後者の分子が基底状態に脱励起する際に蛍光を発し、その光が観測されるパルスの「遅い成分」として「多く」現れる。
 
 \section{実験}
 \subsection{実験セットアップ全体図、回路図}
+
+実験装置の全体像を図\ref{fig:32course}に示す。図の左に加速器があり、加速された陽子が右方へ入射してくる。加速の周期の逆数（RF周波数）は61.6nsであった。陽子ビームが標的に入射すると原子核反応によって中性子や$\gamma$線が放射される。それらをビーム軌道上に設置した液体シンチレータで検出する。反応せずに標的を透過した陽子は電磁石によって軌道を曲げてビームダンプで吸収する。飛行距離は$L=7507[\text{mm}]$であった。
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{figs/equipments/32course.pdf}
     \caption{実験装置全体図}
     \label{fig:32course}
 \end{figure}
+液体シンチレータの構造を図\ref{fig:liquid_scintillator}に示す。
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\linewidth]{figs/equipments/Goodnotes.pdf}
     \caption{液体シンチレータ図}
     \label{fig:liquid_scintillator}
 \end{figure}
+標的には5種類の金属を用いた。それぞれの元素記号とビーム入射方向の厚さを表\ref{tab:targetthickness}に示す。
+\begin{table}[H]
+    \centering
+    \begin{tabular}{cc}
+    \hline
+        標的 & 厚さ\\
+        \hline
+        \hline
+        Al & 10$\mu$m\\
+        Au & 20$\mu$m\\
+        Ag & 40$\mu$m\\
+        Ti & 90$\mu$m\\
+        Li & 9.74mm\\
+        \hline
+    \end{tabular}
+    \caption{標的の種類と厚さ。他に比べ、Li標的が厚くなっている。}
+    \label{tab:targetthickness}
+\end{table}
+本実験で用いた回路図を図\ref{fig:circuit}に示す。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{figs/misc/circuit.pdf}
+    \caption{実験に用いた回路の概念図。}
+    \label{fig:circuit}
+\end{figure}
+
 \subsection{Am-Be線源による電圧の決定}
 ビームタイム中は50MeVのシグナルがQDCのフルスケール2048chに入るようにする必要がある。本実験ではAm-Be線源からのガンマ線(4.44MeV)のコンプトンエッジを観測し、hQDCの図でAm-Be線源のエッジが300ch付近に描像されるように調整することにした。
 \subsection{Am-Be線源によるn-$\gamma$弁別の最適化}
@@ -538,7 +594,7 @@ Time Callibratorによる時間較正の結果から、TDCのチャンネルと�
 \begin{itemize}
     \item 実験装置によって生じる誤差
     \item Ag標的においてIASによるピークが見られなかった要因
-    \item TDC vs. QDCのグラフに表れている信号の意味
+    \item TDC--QDC相関図に表れている信号の意味
 \end{itemize}
 
 \subsection{実験装置によって生じる誤差}
@@ -604,7 +660,7 @@ Time Callibratorによる時間較正の結果から、TDCのチャンネルと�
   \end{minipage}
 \end{figure}
 
-ターゲット内部でのエネルギー減衰の大きさはターゲット厚さに依存するため、\cref{厚さの表}に示した各ターゲット厚さをもとに、入射陽子がターゲット表面から通過した場合に失う最大の減衰エネルギー$E_\text{d}$をLISE++を用いて算出した。
+ターゲット内部でのエネルギー減衰の大きさはターゲット厚さに依存するため、\cref{tab:targetthickness}に示した各ターゲット厚さをもとに、入射陽子がターゲット表面から通過した場合に失う最大の減衰エネルギー$E_\text{d}$をLISE++を用いて算出した。
 結果を\cref{tab:max_decay_energy}に示す。
 
 \begin{table}[H]
@@ -771,7 +827,7 @@ $\Delta E_\text{c}$のどちらの方向に影響するかを考えると、次�
 
 \begin{figure}[hbtp]
     \centering
-    \includegraphics[width=0.5\linewidth]{figs/graph/Al_TDCQDC_separated_comp.pdf}
+    \includegraphics[width=0.8\linewidth]{figs/graph/Al_TDCQDC_separated_comp.pdf}
     \caption{\ce{Al}標的におけるTDC--ADC相関図の信号ごとの分類結果}
     \label{fig:Al_TDC-ADC_separated}
 \end{figure}
@@ -795,7 +851,7 @@ TDC--ADC相関図において、最初に観測される明瞭なピーク（\cr
 となり、測定値とおおむね一致する。このことから、2つ目のピークがビームダンプ起源のガンマ線であるという考えは妥当であるだろう。
 
 \paragraph{荷電粒子の信号}
-TDC--ADC相関図の中で、TDCおよびADCの両方で明瞭なピークを示す信号（\cref{fig:Al_TDC-ADC_separated}の②）は、荷電粒子によるものであると考えられる。荷電粒子はBetheの式（\cref{eq:Bethe}）に示されるように、ガンマ線や中性子に比べシンチレータ中で大きなエネルギー損失を生じ、ADC値が明瞭なピークを形成するためである。また、この信号は$T_\text{RF}$と同周期で出現することから、陽子ビームと同期して放出されていることがわかる。
+TDC--ADC相関図の中で、TDCおよびADCの両方で明瞭なピークを示す信号（\cref{fig:Al_TDC-ADC_separated}の②）は、荷電粒子によるものであると考えられる。荷電粒子はBetheの式（\cref{eq:bethe}）に示されるように、ガンマ線や中性子に比べシンチレータ中で大きなエネルギー損失を生じ、ADC値が明瞭なピークを形成するためである。また、この信号は$T_\text{RF}$と同周期で出現することから、陽子ビームと同期して放出されていることがわかる。
 
 \cref{fig:32course}に示す実験配置を考慮すると、遮蔽物を通過しにくい荷電粒子が検出器に到達する場合、主にターゲット側から入射したものに限られる。したがって、この信号は陽子入射に伴って生成された粒子である可能性が高い。ただし、本実験のデータのみから粒子種を特定することは困難であると考えられる。
 
